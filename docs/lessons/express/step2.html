@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Intro to Express - Basic Server</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">First Express Server</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/33rYWT2vdJU"
+                    title="Basic Express Server Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create a basic Express server with a GET request"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will be able to create a basic express server,
+                        with a get request.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplemental Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2015/11/68747470733a2f2f692e636c6f756475702e636f6d2f7a6659366c4c376546612d3330303078333030302e706e67.png"
+                    alt="Express.js banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    <a
+                        href="http://expressjs.com/"
+                        target="_blank"
+                        rel="noopener"
+                        >Express</a
+                    >
+                    is a "fast, unopinionated, minimalist web framework for
+                    <code>Node.js</code>." It is considered a very thin,
+                    lightweight framework that uses <code>Node.js</code> APIs to
+                    take common uses of <code>Node.js</code> and abstract
+                    (simplify) them for easier use by the developer. In this
+                    document, we will run through how to create a very basic web
+                    server that will run on a port and return a response to a
+                    basic HTTP GET request.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Installation</h3>
+                <ul class="custom-list">
+                    <li>Create project folder/directory on your file system</li>
+                    <li>
+                        From the cmd prompt run: <code>npm init</code>. If you
+                        want to skip all the questions, you can add the
+                        <code>y</code> flag. (<code>npm init -y</code>).
+                        <ul class="custom-list">
+                            <li>
+                                This creates a <code>package.json</code> file
+                                that makes it easier to set up your project in
+                                the future. It's also where we'll save a list of
+                                dependencies that are required for this app to
+                                work. For example, since it's going to be an
+                                express app, we'll have express listed as a
+                                dependency.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        From the cmd prompt, anytime you need a new NPM package
+                        run:
+                        <code>npm install --save &lt;packageName&gt;</code>
+                        (e.g.: <code>npm install --save express</code>)
+                        <ul class="custom-list">
+                            <li>
+                                Many times online you will be told to just run
+                                <code>npm install &lt;packageName&gt;</code>.
+                                Unless you have a good reason not to, you should
+                                always add the <code>-save</code> flag to this
+                                command so that you can automatically add the
+                                package you're installing as a dependency in
+                                <code>package.json</code>.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Very Basic Express Server Setup</h3>
+                <p>
+                    Create a new <code>JavaScript</code> file called
+                    <code>app.js</code> in the project folder you created
+                    earlier. It should sit beside the
+                    <code>package.json</code> file that was called (instead of
+                    being inside some other directory).
+                </p>
+                <p>
+                    We need to bring in the <code>express</code> module by using
+                    the <code>Node.js</code> <code>require()</code> function.
+                    Then we create an instance of <code>express</code> and save
+                    it to a variable called <code>app</code>.
+                </p>
+                <pre><code class="language-jsx">
+// In app.js
+
+const express = require("express");
+const app = express();
+            </code></pre>
+                <p>
+                    The last thing we absolutely <em>have</em> to do for a
+                    server to technically be running is to tell our
+                    <code>app</code> to listen to a certain port.
+                </p>
+                <pre><code class="language-jsx">
+// In app.js
+
+const express = require("express");
+const app = express();
+
+app.listen(3000);
+            </code></pre>
+                <p>
+                    Now if you run <code>node app.js</code> in the terminal,
+                    you'll see the terminal seemingly freeze up with a blinking
+                    cursor. This is actually your server running! It's listening
+                    to
+                    <a
+                        href="http://localhost:3000"
+                        target="_blank"
+                        rel="noopener"
+                        >http://localhost:3000</a
+                    >
+                    for some kind of request to come in. We haven't set it up to
+                    handle any requests quite yet, but now you know your server
+                    is running!
+                </p>
+                <p>
+                    If you want to more clearly see that your server is running,
+                    the <code>.listen()</code> method can take an optional
+                    second callback parameter:
+                </p>
+                <pre><code class="language-jsx">
+// In app.js
+
+const express = require("express");
+const app = express();
+
+app.listen(3000, () => {
+    console.log("App is listening on port 3000!");
+});
+            </code></pre>
+                <p>
+                    You'll have to kill the server in the command line (control
+                    + C) and restart it so that your changes are reflected in
+                    the new running server. Okay, big deal right? We literally
+                    can't do a single thing with this yet...
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Aside: Nodemon</h3>
+                <p>
+                    Before we get too far in developing our server, there's a
+                    nice <code>NPM</code> package called
+                    <code>Nodemon</code> that will automatically watch for
+                    changes in the running <code>JavaScript</code> file and will
+                    restart automatically. This way you won't have to kill and
+                    restart your server all the time while you're developing it!
+                </p>
+                <p>
+                    We'll install it globally, since it's a developer tool and
+                    not a tool your app will really be using itself. Installing
+                    it globally also means we can use it on any other
+                    <code>JS</code> file without having to install it again each
+                    time.
+                </p>
+                <p>
+                    Anywhere in your terminal, type
+                    <code>npm install -g nodemon</code>. That's it! Now you can
+                    use the <code>nodemon</code> tool by typing
+                    <code>nodemon &lt;filename&gt;.js</code> in your terminal,
+                    and it will do all the work of restarting itself anytime it
+                    sees a change in the file.
+                </p>
+                <p>Okay, let's move on.</p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Express Routes</h3>
+                <p>
+                    <code>Express</code> makes it very easy for us to stick
+                    "routes" directly on our new <code>app</code>, organized by
+                    the HTTP request method we're expecting to receive at the
+                    given route. In other words, in order to tell my server to
+                    respond to a GET request at the base
+                    <a
+                        href="http://localhost:3000"
+                        target="_blank"
+                        rel="noopener"
+                        >http://localhost:3000</a
+                    >
+                    address, all I have to do is add the following before my
+                    <code>app.listen()</code> code:
+                </p>
+                <pre><code class="language-jsx">
+app.get('/', (req, res) => {
+    res.send("Hello world!");
+});
+            </code></pre>
+                <p>
+                    If you're using <code>nodemon</code>, your server should
+                    have restarted automatically once you save the file with the
+                    changes. If you're not using <code>nodemon</code>, quit out
+                    of your old server (control + C) and run it again (<code
+                        >node app.js</code
+                    >).
+                </p>
+                <p>
+                    If you typed in everything correctly, you should now be able
+                    to open
+                    <a
+                        href="https://www.getpostman.com/"
+                        target="_blank"
+                        rel="noopener"
+                        >Postman</a
+                    >, make a GET request to <code>localhost:3000</code> and
+                    see, in very boring text, "Hello world!" returned as a
+                    response.
+                </p>
+                <p>
+                    There are much better ways to organize your routes than to
+                    stick everything in your main server file (which you can
+                    <a
+                        href="https://coursework.vschool.io/express-router/"
+                        target="_blank"
+                        rel="noopener"
+                        >learn about here</a
+                    >), but for learning the basics of <code>Express</code>,
+                    this will work for now.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Aside: "req" and "res"</h3>
+                <p>
+                    This is something you'll see <em>very</em> frequently in all
+                    server code, including <code>Node.js</code> and
+                    <code>express</code>. "<code>req</code>" is short for
+                    "request", "<code>res</code>" is short for "response".
+                    Here's the
+                    <a
+                        href="http://expressjs.com/api.html#req"
+                        target="_blank"
+                        rel="noopener"
+                        >express request docs</a
+                    >
+                    and the
+                    <a
+                        href="http://expressjs.com/api.html#res"
+                        target="_blank"
+                        rel="noopener"
+                        >express response docs</a
+                    >
+                    for in-depth study.
+                </p>
+                <p>
+                    <strong>Note:</strong> This is how it is commonly
+                    represented, but you can put whatever names you want in
+                    here. You could say <code>foo</code> and <code>bar</code> if
+                    you wanted, but you'd have to remember that the first one
+                    (<code>foo</code>) represented the request and the second
+                    one (<code>bar</code>) represented the response. So it's
+                    usually best to either stick to <code>req</code> and
+                    <code>res</code> or <code>request</code> and
+                    <code>response</code> here. If you're unfamiliar with how
+                    requests and responses work, you should check out the
+                    <a
+                        href="https://zapier.com/learn/apis/"
+                        target="_blank"
+                        rel="noopener"
+                        >Zapier API Tutorial</a
+                    >.
+                </p>
+                <p>
+                    If you remember our <code>axios</code> requests in
+                    <code>React</code>, we handle an object that comes back from
+                    the call that we typically save in a variable called
+                    <code>response</code>:
+                </p>
+                <pre><code class="language-jsx">
+axios.get("some-url").then(response => {...});
+            </code></pre>
+                <p>
+                    Well now we're on the other side of the internet! The
+                    "<code>req</code>" parameter in our callback function in
+                    <code>express</code> is an object containing all kinds of
+                    information about the request that that client sent to us,
+                    the server. The "<code>res</code>" object is where we can
+                    add data and do any number of other things before we send it
+                    off back to the client who made the request. Above when we
+                    say <code>res.send("Hello world!")</code>, we're telling
+                    <code>express</code> to reply to the request immediately
+                    with just the string "Hello world!" as the response.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    You've just built a server that can respond to a request!
+                    Granted, its a pretty useless server, but a server
+                    nonetheless. <code>Express</code> allows you the flexibility
+                    to organize your server's code any way you want (hence the
+                    tagline that calls it an "unopinionated framework"), but
+                    that still leaves it up to you, the developer, to organize
+                    things in a maintainable and logical fashion. One of the
+                    most common ways to do this is to organize your code into
+                    modules, but for now you should be proud that you wrote your
+                    first server using <code>Node.js</code> and
+                    <code>express</code>!
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

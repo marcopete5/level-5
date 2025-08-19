@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Intro to Express - GET Route with Postman</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">First Express Request - GET</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/U0hDlcfoybI"
+                    title="Express GET Route with Postman Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create and test a GET route with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to create a route for a get request
+                    and implement that route using <code>Postman</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Understanding the Provided Code</h3>
+                <p>
+                    In this section, we'll break down the provided code and
+                    explain what each part is doing. This code is designed to
+                    create a simple <code>Node.js</code> server using
+                    <code>Express</code> and serve a list of fake user data.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Importing Express and Initializing the App</h3>
+                <pre><code class="language-jsx">
+const express = require('express');
+const app = express();
+            </code></pre>
+                <ul class="custom-list">
+                    <li>
+                        <code>const express = require('express');</code>: This
+                        line imports the <code>Express.js</code> framework,
+                        which simplifies building web applications and APIs in
+                        <code>Node.js</code>. It's stored in the
+                        <code>express</code> constant, making it available for
+                        creating an Express application.
+                    </li>
+                    <li>
+                        <code>const app = express();</code>: Here, we create an
+                        instance of an Express application and store it in the
+                        <code>app</code> constant. This <code>app</code> object
+                        is the main entry point for creating routes and handling
+                        HTTP requests.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Fake User Data</h3>
+                <pre><code class="language-jsx">
+const users = [
+    { name: 'joe', age: 20 },
+    { name: 'moe', age: 24 },
+    { name: 'betty', age: 20 },
+    { name: 'sarah', age: 20 },
+    { name: 'mike', age: 20 }
+];
+            </code></pre>
+                <p>
+                    The section below defines some fake user data in an array
+                    called <code>users</code>. This data will be sent as a
+                    response when a GET request is made to the
+                    <code>/users</code> endpoint.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Creating a Route and Starting the Server</h3>
+                <pre><code class="language-jsx">
+app.get('/users', (req, res) => {
+    res.send(users);
+});
+
+app.listen(9000, () => {
+    console.log('The server is running on Port 9000');
+});
+            </code></pre>
+                <ul class="custom-list">
+                    <li>
+                        <code>app.get('/users', (req, res) => { ... });</code>:
+                        This code sets up a route using the
+                        <code>app.get</code> method. It specifies that when a
+                        GET request is made to the <code>/users</code> endpoint,
+                        a callback function should be executed. The callback
+                        function takes two parameters:
+                        <code>req</code> (request) and
+                        <code>res</code> (response). In this case, the callback
+                        function sends the <code>users</code> array as the
+                        response when this route is accessed.
+                    </li>
+                    <li>
+                        <code>app.listen(9000, () => { ... });</code>: This line
+                        starts the Express application and listens on port 9000.
+                        When the server starts, it executes the callback
+                        function, which logs a message indicating that the
+                        server is running on Port 9000.
+                    </li>
+                </ul>
+                <p>
+                    In summary, this code sets up an
+                    <code>Express</code> server, defines a route for handling
+                    GET requests to <code>/users</code>, and responds with the
+                    <code>users</code> data when the endpoint is accessed. It
+                    also starts the server on port 9000, making it ready to
+                    accept incoming requests.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
