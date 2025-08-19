@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Level 5 | Express and MongoDB - Node.js</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">
+                    Introduction to Server Side Programming
+                </h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/90jb9FJEi9Q"
+                    title="Node.js Lesson for Express and MongoDB"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining the difference between client, server, and database in Node.js"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        Students will be able to explain the difference between
+                        the client, server, and database.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2015/11/node-js-banner-770x289.jpg"
+                    alt="Node.js banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    <code>Node</code> is a powerful tool that allows
+                    <code>Javascript</code> to be interpreted
+                    <em>outside</em> of the browser - most importantly, it
+                    allows <code>Javascript</code> to be used as a server-side
+                    language.
+                </p>
+                <p>What does this mean?</p>
+                <p>
+                    Traditionally we used a backend language (like
+                    <code>Python</code>, <code>Ruby</code>, <code>C#</code>,
+                    <code>Go</code>, etc.) to retrieve and control the data from
+                    the database. It was then passed to the
+                    <em>front end</em> where <code>JavaScript</code> (and the
+                    browser) would take over displaying the information to the
+                    end user. Thus nearly every <em>back end</em> programmer had
+                    to know <code>JavaScript</code> <em>and</em> some other
+                    language.
+                </p>
+                <p>
+                    <code>Javascript</code> was made to use in the browser, but
+                    <code>Node</code> changed that. A programmer could use
+                    <code>Javascript</code> on the <em>front end</em> to display
+                    the information <strong>AND</strong> use
+                    <code>Javascript</code>, with <code>Node</code>, on the
+                    <em>back end</em> to get and manipulate data from the data
+                    base.
+                </p>
+                <p>
+                    <code>Node</code> has a vast community of contributors and a
+                    large amount of packages available via the
+                    <code>Node Package Manager (NPM)</code>.
+                    <code>Node</code> is one of the most contributed to programs
+                    in the world.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Background</h3>
+                <p>
+                    <code>Node</code> was built on top of the
+                    <code>JavaScript V8 Engine</code>, which was developed by
+                    Google to run <code>JavaScript</code> code in the Google
+                    Chrome browser. The <code>V8 Engine</code> is widely
+                    considered the best <code>JavaScript</code> engine available
+                    out there.
+                </p>
+                <p>
+                    Through an initiative in the open source community, the
+                    power of the <code>V8 Engine</code> was brought to the
+                    command line by the creation of <code>Node.js</code>.
+                    <code>Node.js</code> is free and open-source, comes with its
+                    own extensive API for interacting with your machine (instead
+                    of just a browser window), and thus allows developers to
+                    build a server entirely in <code>JavaScript</code>. Before
+                    <code>node.js</code>, servers needed to be written in
+                    languages that were already built to interact with machine
+                    code such as <code>C#</code>, <code>Java</code>,
+                    <code>Python</code>, or <code>Ruby</code> (amongst many
+                    others). Now a developer can write both server-side and
+                    client-side code entirely in <code>JavaScript</code>!
+                </p>
+                <p>
+                    There are certain requirements we need in a system in order
+                    to create a web server:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        Better ways to organize our code into reusable pieces
+                    </li>
+                    <li>Ways to deal with files</li>
+                    <li>Ways to deal with databases</li>
+                    <li>Ability to communicate over the internet</li>
+                    <li>
+                        Ability to accept requests and send responses (in a
+                        consistent and standard way)
+                    </li>
+                    <li>Way to deal with work that takes a long time</li>
+                </ul>
+                <p>
+                    The creators of <code>Node.js</code> added APIs that allow
+                    it to accomplish all of the above requirements. The full API
+                    documentation can be found at
+                    <a
+                        href="https://nodejs.org/api/"
+                        target="_blank"
+                        rel="noopener"
+                        >nodejs.org/api/</a
+                    >. Any aspiring <code>Node.js</code> developer should read
+                    through the <code>Node.js</code> documentation extensively
+                    to become familiar with the tools that are available at your
+                    disposal.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

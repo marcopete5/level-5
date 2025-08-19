@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Intro to Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Intro to Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/NYTmA7anV_s"
+                    title="Intro to Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining the role of Express in the MERN stack"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student should be able to explain what
+                        <code>Express</code> is used for.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Express in the MERN Stack: An Overview</h3>
+                <p>
+                    The <code>MERN</code> stack, which stands for
+                    <code>MongoDB</code>, <code>Express</code>,
+                    <code>React</code>, and <code>Node.js</code>, is a popular
+                    choice for building modern web applications. In this
+                    write-up, we'll focus on <code>Express</code> and its role
+                    within the <code>MERN</code> stack.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>What is Express?</h3>
+                <p>
+                    <strong><code>Express.js</code></strong
+                    >, commonly referred to as <code>Express</code>, is a fast,
+                    minimalist, and flexible web application framework for
+                    <code>Node.js</code>. It provides a robust set of features
+                    for building web and mobile applications, making it a
+                    popular choice among developers. <code>Express</code> is
+                    open-source, widely used, and known for its simplicity and
+                    performance.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Express as the "E" in MERN</h3>
+                <p>
+                    In the <code>MERN</code> stack, each component plays a
+                    crucial role in the development of a web application.
+                    <code>Express</code> serves as the "E" in <code>MERN</code>,
+                    and here's what that means:
+                </p>
+                <h4>MongoDB (M)</h4>
+                <p>
+                    <code>MongoDB</code> is a NoSQL database that stores your
+                    application's data. It is a schema-less, document-oriented
+                    database that allows for flexible data storage.
+                    <code>Express</code> helps connect your
+                    <code>Node.js</code> server to <code>MongoDB</code>,
+                    facilitating data retrieval and manipulation through APIs.
+                </p>
+                <h4>Express (E)</h4>
+                <p>
+                    <code>Express</code> acts as the server-side framework in
+                    the <code>MERN</code> stack. It handles the backend logic of
+                    your application, including routing, middleware, and
+                    handling HTTP requests. <code>Express</code> simplifies the
+                    process of building APIs and enables your server to
+                    communicate with the database (<code>MongoDB</code>).
+                </p>
+                <h4>React (R)</h4>
+                <p>
+                    <code>React</code> is a JavaScript library for building user
+                    interfaces. It handles the frontend of your web application,
+                    allowing you to create interactive, single-page applications
+                    (SPAs). <code>React</code> can communicate with the server
+                    (<code>Express</code>) to fetch and send data, providing a
+                    seamless user experience.
+                </p>
+                <h4>Node.js (N)</h4>
+                <p>
+                    <code>Node.js</code> is the runtime environment that
+                    executes <code>JavaScript</code> code on the server. It's
+                    the foundation on which <code>Express</code> is built.
+                    <code>Node.js</code> allows server-side code to run
+                    efficiently and enables non-blocking I/O operations.
+                    <code>Express</code> runs on top of <code>Node.js</code>,
+                    providing a web framework for building server applications.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>The Role of Express in the MERN Stack</h3>
+                <p>
+                    <code>Express</code> is primarily responsible for the
+                    server-side logic of your <code>MERN</code> application.
+                    Here's what it does:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        <strong>Routing:</strong> <code>Express</code> defines
+                        routes that specify how the server should respond to
+                        various HTTP requests. These routes determine the URLs
+                        that clients can access and the corresponding
+                        server-side logic.
+                    </li>
+                    <li>
+                        <strong>Middleware:</strong> <code>Express</code> uses
+                        middleware functions to process incoming requests before
+                        they reach the route handlers. Middleware can handle
+                        tasks such as authentication, logging, data parsing, and
+                        error handling.
+                    </li>
+                    <li>
+                        <strong>API Development:</strong>
+                        <code>Express</code> simplifies the creation of APIs.
+                        You can define endpoints that clients (such as
+                        <code>React</code>) can access to retrieve, update, or
+                        delete data in the <code>MongoDB</code> database.
+                    </li>
+                    <li>
+                        <strong>Integration with MongoDB:</strong>
+                        <code>Express</code> connects to the
+                        <code>MongoDB</code> database using libraries like
+                        <code>Mongoose</code>. It allows your server to interact
+                        with the database, making it possible to store,
+                        retrieve, and modify data.
+                    </li>
+                    <li>
+                        <strong>Serve Static Files:</strong>
+                        <code>Express</code> can serve static files like HTML,
+                        CSS, and <code>JavaScript</code> to the client. This
+                        enables you to host your <code>React</code> application
+                        and serve it to users.
+                    </li>
+                    <li>
+                        <strong>Error Handling:</strong>
+                        <code>Express</code> provides mechanisms for handling
+                        errors and sending appropriate responses to clients.
+                        This ensures that your application gracefully handles
+                        issues that may arise during execution.
+                    </li>
+                    <li>
+                        <strong>Optimized Performance:</strong>
+                        <code>Express</code> is known for its performance and
+                        efficiency. It is designed to handle a large number of
+                        concurrent connections, making it suitable for building
+                        scalable applications.
+                    </li>
+                </ol>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    In the <code>MERN</code> stack, <code>Express</code> serves
+                    as the backend framework that powers your application's
+                    server-side logic. It connects with <code>MongoDB</code>,
+                    allowing you to build APIs and handle data operations. While
+                    <code>React</code> takes care of the frontend,
+                    <code>Express</code> ensures that your application can
+                    communicate with the database and provide a seamless user
+                    experience.
+                </p>
+                <p>
+                    Understanding <code>Express</code> and its role in the
+                    <code>MERN</code> stack is crucial for web developers, as it
+                    enables the creation of robust, full-stack applications that
+                    can handle complex data operations and deliver dynamic,
+                    interactive user interfaces.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <p>
+                    <a
+                        href="https://www.lifewire.com/servers-in-computer-networking-817380"
+                        target="_blank"
+                        rel="noopener"
+                        >What Is a Server in Computer Networking?</a
+                    >
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
