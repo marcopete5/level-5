@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ID's in Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">ID's in Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/rpY17fgRMUI"
+                    title="ID's in Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining the purpose of IDs and implementing UUIDs in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will be able to explain the purpose of ID’s in
+                        back end development.
+                    </li>
+                    <li>
+                        A student will be able to implement <code>uuid</code> to
+                        add ID’s to their data.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Lesson Video Note</h3>
+                <p>
+                    <strong>IMPORTANT</strong>: at minute 3:34 you’ll get some
+                    old syntax for the
+                    <strong><code>uuid</code></strong> import.
+                </p>
+                <p>The new syntax is:</p>
+                <pre><code class="language-jsx">
+const {v4: uuidv4} = require('uuid')
+            </code></pre>
+                <p>
+                    You should then call uuid with <code>uuidv4()</code> instead
+                    of <code>uuid()</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Transitioning from UUIDs to Mongoose in Express.js</h3>
+                <p>
+                    In this <code>Express.js</code> code, we're building a
+                    straightforward API for managing a list of movies. As the
+                    series progresses, we plan to transition from using
+                    Universally Unique Identifiers (UUIDs) to
+                    <code>Mongoose</code>, a popular Object Data Modeling (ODM)
+                    library for <code>MongoDB</code>. Let's explore the
+                    rationale behind this transitioning and why IDs remain a
+                    critical element in our data management.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>The Initial Need for IDs and UUIDs</h3>
+                <p>
+                    In the initial stages of our project, we adopted UUIDs as
+                    unique identifiers for the movies. This decision was made
+                    for several reasons:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        <strong>Data Integrity</strong>: IDs ensure each movie
+                        is uniquely identifiable, preventing data duplication
+                        and inconsistencies. Without unique IDs, managing data
+                        effectively can be challenging.
+                    </li>
+                    <li>
+                        <strong>Data Retrieval</strong>: IDs make it
+                        straightforward to retrieve a specific movie from the
+                        collection. This reduces errors and inefficiencies that
+                        might arise when relying on non-unique attributes like
+                        the movie title.
+                    </li>
+                    <li>
+                        <strong>Data Updates and Deletion</strong>: IDs are
+                        essential for targeting specific items for updates or
+                        removal. They allow for precision in modifying or
+                        deleting data, avoiding unintended changes to unrelated
+                        records.
+                    </li>
+                    <li>
+                        <strong>Efficient Searches</strong>: Searching for a
+                        movie by its ID is faster and more efficient than
+                        scanning the entire collection or using non-unique
+                        attributes.
+                    </li>
+                </ol>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Transitioning to Mongoose</h3>
+                <p>
+                    As our lesson series progresses, we will introduce
+                    <code>Mongoose</code>, a powerful tool for simplifying
+                    interactions with <code>MongoDB</code>, a popular NoSQL
+                    database. Here's why we're transitioning from UUIDs to
+                    <code>Mongoose</code>:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        <strong>Database Integration</strong>:
+                        <code>Mongoose</code> provides seamless integration with
+                        <code>MongoDB</code>, allowing us to work with a
+                        well-established database system. This integration
+                        streamlines data storage and retrieval processes.
+                    </li>
+                    <li>
+                        <strong>Schema Definition</strong>:
+                        <code>Mongoose</code> enables us to define clear and
+                        structured schemas for our data. With these schemas, we
+                        can specify the structure and properties of our movie
+                        documents. This structured approach enhances data
+                        consistency and reduces errors.
+                    </li>
+                    <li>
+                        <strong>Automatic ID Generation</strong>:
+                        <code>Mongoose</code> automatically generates unique IDs
+                        for documents when they are created. This eliminates the
+                        need for manual UUID generation and simplifies the data
+                        creation process.
+                    </li>
+                    <li>
+                        <strong>Validation and Middleware</strong>:
+                        <code>Mongoose</code> offers built-in validation and
+                        middleware capabilities, making it easier to enforce
+                        data integrity rules and perform pre and post-processing
+                        of data.
+                    </li>
+                    <li>
+                        <strong>Query Building</strong>:
+                        <code>Mongoose</code> provides a rich set of query
+                        building tools, simplifying the process of searching,
+                        updating, and deleting records in the database.
+                    </li>
+                </ol>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>The Role of IDs in Mongoose</h3>
+                <p>
+                    Even with the transition to <code>Mongoose</code>, IDs
+                    remain an essential component of our data management:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <strong>Uniqueness</strong>:
+                        <code>Mongoose</code> generates unique IDs for each
+                        document, ensuring that no two movies in the database
+                        share the same identifier. This uniqueness is crucial
+                        for data integrity.
+                    </li>
+                    <li>
+                        <strong>Data Retrieval</strong>: IDs continue to play a
+                        central role in retrieving specific movies from the
+                        collection. <code>Mongoose</code> simplifies this
+                        process, allowing us to perform queries based on ID
+                        effortlessly.
+                    </li>
+                    <li>
+                        <strong>Data Updates and Deletion</strong>: IDs are
+                        still the key to targeting and modifying or deleting
+                        specific records. <code>Mongoose</code>'s query
+                        capabilities make these operations straightforward.
+                    </li>
+                </ul>
+                <p>
+                    As we shift our focus to <code>Mongoose</code>, we benefit
+                    from the advantages it offers while still recognizing the
+                    importance of unique IDs in managing our movie data. This
+                    transition not only enhances our data management
+                    capabilities but also prepares us for more advanced database
+                    interactions in future lessons.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

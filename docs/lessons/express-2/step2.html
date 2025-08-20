@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>POST Request in Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">POST Request in Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/q-81qgJgfE8"
+                    title="POST Request in Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create and test a POST route with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will be able to create a route for a post
+                        request and implement it using <code>Postman</code>.
+                    </li>
+                    <li>
+                        A student will be able to explain how the request body
+                        is used in a post request.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Handling POST Requests in Express</h3>
+                <p>
+                    In this section, we'll dive into a piece of code that
+                    demonstrates how to handle POST requests in an
+                    <code>Express.js</code> application. The code allows you to
+                    add new movie data to the server's database.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Setting Up the Server</h3>
+                <p>
+                    To begin, we create an <code>Express</code> application and
+                    set up a basic server. Here's the relevant code:
+                </p>
+                <pre><code class="language-jsx">
+const express = require('express');
+const app = express();
+
+// Fake Data
+const movies = [
+    { title: 'die hard', genre: 'action' },
+    { title: 'star wars IV', genre: 'fantasy' },
+    { title: 'lion king', genre: 'fantasy' },
+    { title: 'friday the 13th', genre: 'horror' }
+];
+            </code></pre>
+                <p>
+                    We have created a list of fake movie data in the
+                    <code>movies</code> array.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Handling POST Requests</h3>
+                <pre><code class="language-jsx">
+app.post('/movies', (req, res) => {
+    const newMovie = req.body;
+    movies.push(newMovie);
+    res.send(`Successfully added "${newMovie.title}" to the database`);
+});
+            </code></pre>
+                <ul class="custom-list">
+                    <li>
+                        <code>app.post('/movies', (req, res) => { ... });</code
+                        >: This code sets up a route using the
+                        <code>app.post</code> method. It specifies that when a
+                        POST request is made to the
+                        <code>/movies</code> endpoint, a callback function
+                        should be executed. The callback function takes two
+                        parameters: <code>req</code> (request) and
+                        <code>res</code> (response).
+                    </li>
+                    <li>
+                        <code>const newMovie = req.body;</code>: In a POST
+                        request, the data sent by the client is typically
+                        included in the request body. This line attempts to
+                        extract the new movie data from the request body and
+                        stores it in the <code>newMovie</code> variable.
+                    </li>
+                    <li>
+                        <code>movies.push(newMovie);</code>: This line adds the
+                        new movie object to the <code>movies</code> array. It's
+                        essentially updating the database with the new movie.
+                    </li>
+                    <li>
+                        <code
+                            >res.send(`Successfully added "${newMovie.title}" to
+                            the database`);</code
+                        >: After the new movie is added to the array, this line
+                        sends a response to the client, indicating that the
+                        addition was successful and mentioning the title of the
+                        movie that was added.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Starting the Server</h3>
+                <pre><code class="language-jsx">
+app.listen(9000, () => {
+    console.log('The server is running on Port 9000');
+});
+            </code></pre>
+                <p>
+                    In summary, this code handles POST requests to add new movie
+                    data to the server's database. It is a basic example of how
+                    you can update your server's data through POST requests.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

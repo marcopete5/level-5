@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Express Router</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Express Router</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/W2PoWjAm0V0"
+                    title="Express Router Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create and use Express Router with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will be able to create a router file and
+                        connect it to their server file.
+                    </li>
+                    <li>
+                        A student will be able to test their router using
+                        <code>Postman</code>.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2015/12/Noah-two-roads-diverged-RESIZED-for-banner.jpg"
+                    alt="Express Router banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    You have now experienced the beauty and simplicity of
+                    <code>Node</code> and <code>Express</code> - and you have
+                    created a few simple back-end servers and enabled your
+                    client to talk to it. How cool!
+                </p>
+                <p>
+                    So far we've been putting all of our routes on the
+                    <code>app</code> object that was created with the line
+                    <code>const app = express()</code>.
+                    (<code>app.get(...)</code>, <code>app.post(...)</code>,
+                    etc.) Although this <em>does</em> work, it isn't a very good
+                    way to organize our code. If you were to create an
+                    application that required 5 different routes, each with its
+                    own <code>GET</code>, <code>PUT</code>, <code>POST</code>,
+                    and <code>DELETE</code> operations, you would already have
+                    25 routes being handled inside your main server file. We can
+                    do better much than that!
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Beginning code</h3>
+                <p>
+                    The following is the code we'll start out with. To focus on
+                    the routing portion of this, we won't be connecting a
+                    database or saving any data, but instead just returning a
+                    string response so we know our endpoints are working.
+                </p>
+                <pre><code class="language-jsx">
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 8000;
+
+// Routes for 'fruits'
+app.get("/fruit", (req, res) => {
+    res.send("GET on /fruit endpoint");
+});
+
+app.post("/fruit", (req, res) => {
+    res.send("POST on /fruit endpoint");
+});
+
+app.get("/fruit/:fruitId", (req, res) => {
+    res.send(`GET on /fruit/${req.params.fruitId} endpoint`);
+});
+
+app.put("/fruit/:fruitId", (req, res) => {
+    res.send(`PUT on /fruit/${req.params.fruitId} endpoint`);
+});
+
+app.delete("/fruit/:fruitId", (req, res) => {
+    res.send(`DELETE on /fruit/${req.params.fruitId} endpoint`);
+});
+
+// Routes for 'vegetables'
+app.get("/vegetable", (req, res) => {
+    res.send("GET on /vegetable endpoint");
+});
+
+app.post("/vegetable", (req, res) => {
+    res.send("POST on /vegetable endpoint");
+});
+
+app.get("/vegetable/:vegetableId", (req, res) => {
+    res.send(`GET on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+app.put("/vegetable/:vegetableId", (req, res) => {
+    res.send(`PUT on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+app.delete("/vegetables/:vegetableId", (req, res) => {
+    res.send(`DELETE on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+// Run the server
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});
+            </code></pre>
+                <p>
+                    As you can already see, this would be pretty hard to
+                    maintain. There's no separation of concerns, since
+                    everything is shoved into one place, and there's tons of
+                    repeated code. Fortunately we've learned about
+                    <code>Node</code> Modules
+                    <a
+                        href="http://coursework.vschool.io/node-modules-basics/"
+                        target="_blank"
+                        rel="noopener"
+                        >here</a
+                    >
+                    and
+                    <a
+                        href="http://coursework.vschool.io/day-9-modules/"
+                        target="_blank"
+                        rel="noopener"
+                        >here</a
+                    >, and have learned all about different
+                    <a
+                        href="http://coursework.vschool.io/node-module-patterns/"
+                        target="_blank"
+                        rel="noopener"
+                        >module patterns</a
+                    >
+                    as well, so now we can use this power to help our cluttered
+                    application!
+                </p>
+                <p>
+                    Before we move on, we need to learn about
+                    <a
+                        href="http://expressjs.com/en/guide/routing.html"
+                        target="_blank"
+                        rel="noopener"
+                        >express Routers</a
+                    >.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Express Routers</h3>
+                <p>
+                    <code>Express</code> comes with a built-in
+                    <code>Router</code> that helps us organize our code better,
+                    and fortunately it's really easy to use.
+                </p>
+                <pre><code class="language-jsx">
+const fruitRouter = express.Router();
+            </code></pre>
+                <p>
+                    This line creates an instance of an express
+                    <code>Router</code> that allows us to modularize our routes.
+                    We can now put our shortcut <code>.get()</code>,
+                    <code>.post()</code> etc. methods on this
+                    <code>Router</code> instead of directly on the
+                    <code>app</code> instance. Then we mount that router as
+                    middleware on a specific mount path in
+                    <code>server.js</code>:
+                </p>
+                <pre><code class="language-jsx">
+// Routes for 'fruits'
+const fruitRouter = express.Router();
+
+fruitRouter.get("/fruit", (req, res) => {
+    res.send("GET on /fruit endpoint");
+});
+
+fruitRouter.post("/fruit", (req, res) => {
+    res.send("POST on /fruit endpoint");
+});
+
+fruitRouter.get("/fruit/:fruitId", (req, res) => {
+    res.send(`GET on /fruit/${req.params.fruitId} endpoint`);
+});
+
+fruitRouter.put("/fruit/:fruitId", (req, res) => {
+    res.send(`PUT on /fruit/${req.params.fruitId} endpoint`);
+});
+
+fruitRouter.delete("/fruit/:fruitId", (req, res) => {
+    res.send(`DELETE on /fruit/${req.params.fruitId} endpoint`);
+});
+
+// Routes for 'vegetables'
+const veggieRouter = express.Router();
+
+veggieRouter.get("/vegetable", (req, res) => {
+    res.send("GET on /vegetable endpoint");
+});
+
+veggieRouter.post("/vegetable", (req, res) => {
+    res.send("POST on /vegetable endpoint");
+});
+
+veggieRouter.get("/vegetable/:vegetableId", (req, res) => {
+    res.send(`GET  on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+veggieRouter.put("/vegetable/:vegetableId", (req, res) => {
+    res.send(`PUT  on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+veggieRouter.delete("/vegetables/:vegetableId", (req, res) => {
+    res.send(`DELETE  on /vegetable/${req.params.vegetableId} endpoint`);
+});
+
+// Mount the routers as middleware (we will be making a change here next)
+app.use("/", fruitRouter);
+app.use("/", veggieRouter);
+            </code></pre>
+                <p>
+                    I know what you're probably thinking - "this is actually a
+                    bit MORE cluttered than before, how is this helpful?" It's a
+                    legitimate question, to which the answer is "It isn't!" Not
+                    yet. We need to put these routes in another file entirely to
+                    actually modularize it. But first we need to make a small
+                    change before moving on.
+                </p>
+                <p>
+                    Notice all the repetition in the routers? We're re-typing
+                    <code>fruitRouter</code> and <code>veggieRouter</code> over
+                    and over, AND we're re-typing <code>/fruit</code> and
+                    <code>/vegetable</code> over and over inside the route. This
+                    is a bad practice, because we may mistype something and
+                    cause an unnecessary error. In fact, you might have noticed
+                    that there are a few typos in the above code (a few extra
+                    pluralized words that shouldn't be pluralized -
+                    <code>/fruits</code>, <code>veggiesRouter</code>, etc.)
+                </p>
+                <p>We can avoid this by doing two things:</p>
+                <ol class="custom-list">
+                    <li>
+                        Using the <code>Router.route</code> method and chaining
+                        our <code>get</code>, <code>post</code>,
+                        <code>put</code>, and <code>delete</code> methods
+                        together, and
+                    </li>
+                    <li>
+                        Mounting the middleware at a more specific mount path.
+                    </li>
+                </ol>
+                <p>Let's do these things:</p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    1) Refactor to use the <code>Router.route()</code> method:
+                </h3>
+                <pre><code class="language-jsx">
+// Routes for 'fruits'
+const fruitRouter = express.Router();
+
+// Here we set the route once with .route("/routeName"), then
+// chain the other methods together without repeating the routeName again and again.
+fruitRouter.route("/fruit")
+    .get((req, res) => {
+        res.send("GET on /fruit endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /fruit endpoint");
+    });
+
+fruitRouter.route("/fruit/:fruitId")
+    .get((req, res) => {
+        res.send(`GET on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE on /fruit/${req.params.fruitId} endpoint`);
+    });
+
+// Routes for 'vegetables'
+const veggieRouter = express.Router();
+
+veggieRouter.route("/vegetable")
+    .get((req, res) => {
+        res.send("GET on /vegetable endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /vegetable endpoint");
+    });
+
+veggieRouter.route("/vegetable/:vegetableId")
+    .get((req, res) => {
+        res.send(`GET  on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT  on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE  on /vegetable/${req.params.vegetableId} endpoint`);
+    });
+
+app.use("/", fruitRouter);
+app.use("/", veggieRouter);
+            </code></pre>
+                <p>
+                    Now I'm only typing the route once, thereby reducing the
+                    chance of having a hidden typo. By chaining the HTTP method
+                    handlers (<code>.get()</code>, etc.), I remove their first
+                    parameter and only have to specify the function to run when
+                    that route is reached.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    2) Refactor by mounting router to a more specific mount path
+                </h3>
+                <pre><code class="language-jsx">
+// Routes for 'fruits'
+const fruitRouter = express.Router();
+
+// We remove the "/fruit" here and put it below in app.use("/fruit", fruitRouter).
+// Same goes for the "/fruit/:fruitId" and the "/vegetable" routes as well
+fruitRouter.route("/")
+    .get((req, res) => {
+        res.send("GET on /fruit endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /fruit endpoint");
+    });
+
+fruitRouter.route("/:fruitId")
+    .get((req, res) => {
+        res.send(`GET on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE on /fruit/${req.params.fruitId} endpoint`);
+    });
+
+// Routes for 'vegetables'
+const veggieRouter = express.Router();
+
+veggieRouter.route("/")
+    .get((req, res) => {
+        res.send("GET on /vegetable endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /vegetable endpoint");
+    });
+
+veggieRouter.route("/:vegetableId")
+    .get((req, res) => {
+        res.send(`GET on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE on /vegetable/${req.params.vegetableId} endpoint`);
+    });
+
+// Mount the specified router to be used only on the specified base (mount) path
+app.use("/fruit", fruitRouter);
+app.use("/vegetable", veggieRouter);
+            </code></pre>
+                <p>
+                    Okay, we've refactored these to be less repetitive, let's
+                    modularize!
+                </p>
+                <p>
+                    First we create a new folder called <code>routes</code> in
+                    our project, then we'll create 2 new files,
+                    <code>fruitRoutes.js</code> and
+                    <code>vegetableRoutes.js</code>. In those files we'll need
+                    to copy/paste the respective code, and add a reference to
+                    express so we can still use the
+                    <code>express.Router()</code> line:
+                </p>
+                <pre><code class="language-jsx">
+// fruitRoutes.js
+
+const express = require("express");
+const fruitRouter = express.Router();
+
+fruitRouter.route("/")
+    .get((req, res) => {
+        res.send("GET on /fruit endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /fruit endpoint");
+    });
+
+fruitRouter.route("/:fruitId")
+    .get((req, res) => {
+        res.send(`GET on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT on /fruit/${req.params.fruitId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE on /fruit/${req.params.fruitId} endpoint`);
+    });
+
+// export the entire router so we can require() it in server.js
+module.exports = fruitRouter;
+            </code></pre>
+                <pre><code class="language-jsx">
+// vegetableRoutes.js
+
+const express = require("express");
+const veggieRouter = express.Router();
+
+veggieRouter.route("/")
+    .get((req, res) => {
+        res.send("GET on /vegetable endpoint");
+    })
+    .post((req, res) => {
+        res.send("POST on /vegetable endpoint");
+    });
+
+veggieRouter.route("/:vegetableId")
+    .get((req, res) => {
+        res.send(`GET on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .put((req, res) => {
+        res.send(`PUT on /vegetable/${req.params.vegetableId} endpoint`);
+    })
+    .delete((req, res) => {
+        res.send(`DELETE on /vegetable/${req.params.vegetableId} endpoint`);
+    });
+
+module.exports = veggieRouter;
+            </code></pre>
+                <pre><code class="language-jsx">
+//server.js
+
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 8000;
+
+// You can skip a step by requiring the modules inline like so.
+// It works to do the require on its own line as well, it's up to you.
+app.use("/fruit", require("./routes/fruitRoutes"));
+app.use("/vegetable", require("./routes/vegetableRoutes"));
+
+// Run the server
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});
+            </code></pre>
+                <p>
+                    And now we have <strong>much</strong> more reliable,
+                    better-organized, and less error-prone code!
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    When you're first spinning up your server and just testing a
+                    route or two, it's fine to put your routes directly on the
+                    <code>app</code> instance. But that should really only be
+                    used for testing. It is much safer and a much better
+                    practice to modularize your code this way. You can see above
+                    how much cleaner the <code>server.js</code> file became
+                    after we put the routes in their own folders.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

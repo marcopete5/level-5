@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Intro to REST</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Intro to REST</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/Q5ETjJLGaOc"
+                    title="Intro to REST Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining REST principles and route naming conventions"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will know what <code>REST</code> stands for
+                        and what it means
+                    </li>
+                    <li>
+                        A student will gain some knowledge about keywords used
+                        in back end development.
+                    </li>
+                    <li>
+                        A student will be able to implement good naming
+                        conventions for their routes.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <h4>An Introduction to APIs</h4>
+                <p>
+                    You can find a comprehensive introduction to APIs
+                    <a
+                        href="https://zapier.com/learn/apis/"
+                        target="_blank"
+                        rel="noopener"
+                        >here</a
+                    >.
+                </p>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2017/06/rest.jpg"
+                    alt="REST API banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    As you embark on the journey of developing your own backend
+                    API for data access, you'll quickly realize the complexity
+                    that can arise. This complexity can be managed effectively
+                    by adhering to the principles of
+                    <strong><code>REST</code></strong> (Representational State
+                    Transfer), a widely-used design approach for creating APIs.
+                    This guide will focus on the most important and
+                    beginner-friendly aspects of RESTful API design to help you
+                    keep your API organized, understandable, and user-friendly.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Example</h3>
+                <p>
+                    To illustrate these concepts, let's consider an example of a
+                    website that sells outdoor equipment, such as snowboards,
+                    skis, bikes, and more. Keep in mind that there is no single
+                    "right" way to structure an API, so the solution we present
+                    here is not the only one possible.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Terminology</h3>
+                <p>
+                    Before diving into <code>REST</code> API design, let's
+                    establish some key terms you'll encounter throughout this
+                    lesson:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <strong>Resource</strong>: A single instance of an
+                        object, for example, a specific brand/model of a
+                        snowboard.
+                    </li>
+                    <li>
+                        <strong>Collection</strong>: A group of similar objects,
+                        like all the mountain bikes sold in your store,
+                        regardless of brand or model.
+                    </li>
+                    <li>
+                        <strong>Base (or Root) URL</strong>: The initial part of
+                        the URL for all requests to your API. It typically
+                        appears as something like
+                        <code>http://api.equipment.com/v1</code> or
+                        <code>http://equipment.com/api/v1</code>. The "v1"
+                        indicates that this is the first version of your API,
+                        allowing you to create updated versions in the future.
+                        This distinction helps manage changes and updates to
+                        your API.
+                    </li>
+                    <li>
+                        <strong>API Endpoint</strong>: The part of the URL that
+                        follows the Base URL, such as <code>/ski</code> or
+                        <code>/ski/:skiId</code>.
+                    </li>
+                    <li>
+                        <strong><code>:nounId</code></strong
+                        >: The colon (:) preceding a word indicates that dynamic
+                        data is expected in that part of the endpoint. For
+                        example, in <code>/ski/:skiId</code>, the endpoint could
+                        be something like <code>/ski/1234</code>, where
+                        <code>1234</code> represents the unique ID of a specific
+                        ski in your database.
+                    </li>
+                    <li>
+                        <strong>Client</strong>: The entity, whether a person or
+                        a machine, that consumes information from your API. In
+                        this context, it often refers to a browser application,
+                        like an Angular app running in a Chrome browser, but it
+                        could also be an iOS or Android app or even another
+                        server accessing your API for data.
+                    </li>
+                    <li>
+                        <strong>Server</strong>: The machine where your API
+                        runs.
+                    </li>
+                    <li>
+                        <strong>Request Method</strong>: The type of operation
+                        performed on the database, including
+                        <code>GET</code> (retrieve data),
+                        <code>POST</code> (create new data),
+                        <code>PUT</code> (update data), and
+                        <code>DELETE</code> (remove data).
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Nouns > Verbs</h3>
+                <p>
+                    One of the primary principles of RESTful API design is to
+                    keep API endpoints clear and easy to understand in terms of
+                    the resource they provide. In the past, non-RESTful design
+                    practices led to endpoints like <code>/get-tents</code>,
+                    which returned a list of tents from the database. With
+                    <code>REST</code>, the request method already specifies the
+                    operation (<code>GET</code>, <code>POST</code>,
+                    <code>PUT</code>, <code>DELETE</code>), so the endpoint
+                    itself should only contain the noun representing the
+                    resource. Instead of making a <code>GET</code> request to
+                    <code>/get-tents</code>, create an endpoint that handles
+                    <code>GET</code> requests for <code>/tent</code> or
+                    <code>/tents</code>. You can choose to use singular or
+                    plural nouns, but consistency is key. In this lesson, we'll
+                    stick with singular nouns.
+                </p>
+                <p>
+                    Using nouns allows you to reuse endpoints and perform
+                    different actions based on the request method, leading us to
+                    the next section.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    <code>GET</code>, <code>POST</code>, <code>PUT</code>,
+                    <code>DELETE</code>
+                </h3>
+                <h4>GET List of Resources</h4>
+                <p>
+                    In a RESTful design, a <code>GET</code> request to
+                    <code>/bike</code> should return an array (list) of bikes
+                    from your API. In the context of our outdoor equipment
+                    store, this would be a list of bikes to be displayed on a
+                    web page, including details like images, brand names, and
+                    prices. Some APIs may limit the amount of information
+                    returned in a "GET list" endpoint, ensuring that the
+                    response doesn't contain unnecessary data.
+                </p>
+                <p><strong>Examples:</strong></p>
+                <ul class="custom-list">
+                    <li>
+                        <code>GET /tent</code> - returns a list of tents
+                        available in our store.
+                    </li>
+                    <li>
+                        <code>GET /glove</code> - returns a list of gloves
+                        offered in our store.
+                    </li>
+                    <li>And so on.</li>
+                </ul>
+                <p>
+                    The response for <code>GET /tent</code> might look like this
+                    in JSON:
+                </p>
+                <pre><code class="language-json">
+[
+  {
+    "brand": "Coleman",
+    "model": "Sundome",
+    "type": "dome tent",
+    "shortDescription": "4-person dome tent",
+    "itemNumber": 2000024582,
+    "capacity": 4,
+    ... and more ...
+  },
+  {
+    "brand": "Marmot",
+    "model": "Catalyst",
+    "type": "backpacking",
+    "shortDescription": "2-person Tent with Footprint",
+    "itemNumber": 2000024583,
+    "capacity": 2,
+    ... and more ...
+  },
+  {... and more ...}
+]
+            </code></pre>
+                <h4>GET Single Resource</h4>
+                <p>
+                    A <code>GET</code> request to <code>/bike</code> returns an
+                    array of bikes, while a <code>GET</code> request to
+                    <code>/bike/:bikeId</code> returns a single resource object
+                    for the bike with the unique ID indicated by
+                    <code>:bikeId</code>. For example,
+                    <code>GET /bike/123</code> would retrieve a single bike
+                    object, not an array, as follows:
+                </p>
+                <pre><code class="language-json">
+{
+    "brand": "Cannondale",
+    "model": "CAAD12 Disc Dura Ace",
+    "price": "$3,999",
+    "type": "Road Bike",
+    ... and more ...
+}
+            </code></pre>
+                <h4>POST a New Resource</h4>
+                <p>
+                    When submitting a <code>POST</code> request to create a new
+                    item in the server's database, it is usually directed to the
+                    <code>/noun</code> endpoint, not <code>/noun/:nounId</code>.
+                    Think of it as adding a new "noun" to the existing
+                    collection of "nouns."
+                </p>
+                <h4>PUT (Update) an Existing Resource</h4>
+                <p>
+                    <code>PUT</code> requests are used to modify an existing
+                    resource, so the endpoint must include the ID of the
+                    resource to update. For example, to change the price of a
+                    helmet with ID <code>42</code>, you would submit:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        A <code>PUT</code> request to
+                        <code>/helmet/42</code> endpoint.
+                    </li>
+                    <li>
+                        An object (or partial object) containing the new price,
+                        like:
+                    </li>
+                </ol>
+                <pre><code class="language-json">
+{
+    "price": "$39"
+}
+            </code></pre>
+                <p>
+                    <strong>Note about PUT vs. PATCH:</strong> If you're only
+                    updating part of the resource and not completely replacing
+                    it, a <code>PATCH</code> request is more suitable than
+                    <code>PUT</code>. However, for simplicity and to avoid
+                    delving into extensive discussions about
+                    <code>REST</code> specifications, we'll use
+                    <code>PUT</code> requests in this class for learning
+                    purposes. If you're interested in the differences, you can
+                    explore this post on <code>PUT</code> vs.
+                    <code>PATCH</code>.
+                </p>
+                <h4>DELETE</h4>
+                <p>
+                    <code>DELETE</code> requests are used to remove a single
+                    resource from the database. The endpoint for
+                    <code>DELETE</code> is typically <code>/noun/:nounId</code>,
+                    indicating which item should be removed. Sending
+                    <code>DELETE</code> to just <code>/noun/</code> would imply
+                    removing the entire collection of resources, which is
+                    generally not an operation you'd want to allow.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Nesting API Design</h3>
+                <p>
+                    As resources often relate to other resources, your APIs can
+                    become more complex than simple
+                    <code>/noun[/:nounId]</code> endpoints. Suppose you're
+                    creating endpoints for bicycles in your outdoor equipment
+                    shop, and you want to access all the components of a
+                    specific bike (frame, brakes, wheel size, etc.). In this
+                    case, you might create an endpoint like
+                    <code>/bike/:bikeId/components</code>. The "components" part
+                    of the endpoint suggests it should return an array of all
+                    components for the bike specified by the ID earlier in the
+                    URL.
+                </p>
+                <p>
+                    It's important to note that nesting the components resource
+                    in the bike endpoint doesn't necessarily mean that the data
+                    is nested in the database. Components could also have their
+                    own endpoints like <code>/components</code> and
+                    <code>/components/:componentId</code> for interaction with
+                    all components, whether they belong to a bike, a snowboard,
+                    or any other product.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    While there's a wealth of information and differing opinions
+                    about what makes an API perfectly RESTful, adhering closely
+                    to <code>REST</code> principles will help make your API
+                    logical, conventional, easy to use, and organized as your
+                    code evolves. To delve deeper into <code>REST</code> API
+                    design specifics, you can explore the
+                    <a
+                        href="http://www.restapitutorial.com/"
+                        target="_blank"
+                        rel="noopener"
+                        >REST API Tutorial</a
+                    >.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
