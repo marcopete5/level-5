@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Express Params</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Express Params</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/Flomle9E2o0"
+                    title="Express Params Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to use URL parameters in Express with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to write a <code>get</code> request
+                    using params to get one object back from the data.
+                </p>
+                <p>
+                    A student will be able to test their route using
+                    <code>Postman</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2015/12/banner4.jpg"
+                    alt="Express Params banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <h4>Understanding URL Parameters in Express.js</h4>
+                <p>
+                    When learning about the Request/Response cycle in
+                    <code>Express.js</code>, you'll come across two concepts
+                    that can be quite confusing:
+                    <strong>URL parameters</strong>. These parameters are an
+                    essential part of dynamic routes in your Express
+                    application. Here, we'll explore what URL parameters are and
+                    how to use them effectively.
+                </p>
+                <p><strong>What Are URL Parameters?</strong></p>
+                <p>
+                    URL parameters are dynamic values that are part of a page's
+                    URL route. In RESTful API design, you structure your routes
+                    as follows:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        A <code>GET</code> request to
+                        <code>/resource</code> returns a list of all items of
+                        that resource.
+                    </li>
+                    <li>
+                        A <code>GET</code> request to
+                        <code>/resource/&lt;id&gt;</code> (e.g.,
+                        <code>/resource/12</code>) retrieves a single item of
+                        that resource with the specified
+                        <code>&lt;id&gt;</code>.
+                    </li>
+                    <li>
+                        A <code>POST</code> request to
+                        <code>/resource</code> adds a new item to the list of
+                        resources.
+                    </li>
+                    <li>
+                        A <code>PUT</code> request to
+                        <code>/resource/&lt;id&gt;</code> updates the item with
+                        the given <code>&lt;id&gt;</code>.
+                    </li>
+                    <li>
+                        A <code>DELETE</code> request to
+                        <code>/resource/&lt;id&gt;</code> removes the specified
+                        item.
+                    </li>
+                </ul>
+                <p>
+                    <strong
+                        >Using <code>req.params</code> to Handle URL
+                        Parameters</strong
+                    >
+                </p>
+                <p>
+                    To handle dynamic URL parameters, you use
+                    <code>req.params</code> in Express. When defining routes
+                    with changing values, you can specify a placeholder variable
+                    name (beginning with a colon, e.g., <code>:id</code>) in
+                    your route. Express will then populate the
+                    <code>req.params</code> object with the variable from the
+                    incoming request:
+                </p>
+                <pre><code class="language-jsx">
+const express = require("express");
+const app = express();
+
+app.get("/resource/:id", (req, res) => {
+    console.log(req.params);
+    // Look up the resource with the id from req.params.id in the database
+    // Respond with the resource data.
+})
+            </code></pre>
+                <p>
+                    For example, a <code>GET</code> request to
+                    <code>/resource/12</code> would print
+                    <code>{ id: 12 }</code> to the console. This approach allows
+                    you to handle dynamic URL parameters effectively, following
+                    best practices for RESTful routing.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion: Understanding URL Parameters in Express.js</h3>
+                <p>
+                    URL parameters play a crucial role in dynamic routing with
+                    <code>Express.js</code>. By embracing the RESTful routing
+                    structure and utilizing
+                    <strong><code>req.params</code></strong
+                    >, you can easily handle dynamic values in your routes. This
+                    approach adheres to best practices and ensures your Express
+                    application is both flexible and efficient. As you explore
+                    Express further, remember that mastering URL parameters is a
+                    fundamental step toward building powerful and dynamic web
+                    applications.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

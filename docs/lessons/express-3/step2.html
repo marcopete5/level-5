@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Express Queries</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Express Queries</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/OyPfdT2d5Dw"
+                    title="Express Queries Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to use query strings in Express with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to implement a
+                    <code>get</code> request using queries.
+                </p>
+                <p>
+                    A student will be able to test their route using
+                    <code>Postman</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2015/12/banner4.jpg"
+                    alt="Express Queries banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <h4>Understanding Query Strings in Express.js</h4>
+                <p>
+                    In your exploration of the Request/Response cycle with
+                    <code>Express.js</code>, you may encounter another crucial
+                    concept: <strong>query strings</strong>. Query strings are a
+                    powerful tool for filtering and modifying the results for a
+                    specified resource. Here, we'll delve into what query
+                    strings are and how to work with them in Express.
+                </p>
+                <p><strong>What Are Query Strings?</strong></p>
+                <p>
+                    Query strings, often referred to as query parameters or
+                    query parameters, are used for filtering data when fetching
+                    a resource. They are a set of key-value pairs appended to
+                    the end of a URL. These key-value pairs allow you to modify
+                    the results of a request by specifying filtering criteria.
+                </p>
+                <p>
+                    <strong
+                        >Handling Query Strings with
+                        <code>req.query</code></strong
+                    >
+                </p>
+                <p>
+                    In Express, query strings are easily handled using
+                    <code>req.query</code>. When a request with a query string
+                    is received, Express parses it and populates the
+                    <code>req.query</code> object. This object contains the
+                    specified key-value pairs from the query string, allowing
+                    you to filter or modify the data accordingly.
+                </p>
+                <pre><code class="language-jsx">
+app.get("/resource", (req, res) => {
+    console.log(req.query);
+    // Retrieve a list of all items of the resource from the database,
+    // filtering based on the key-value pairs in req.query.
+})
+            </code></pre>
+                <p>
+                    For instance, a <code>GET</code> request to
+                    <code>/resource?filter=example&amp;sort=asc</code> would
+                    result in <code>{ filter: "example", sort: "asc" }</code> in
+                    <code>req.query</code>. This functionality enables you to
+                    handle dynamic query strings with ease, providing
+                    flexibility in fetching filtered data.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion: Understanding Query Strings in Express.js</h3>
+                <p>
+                    Query strings are an invaluable tool when it comes to
+                    filtering and customizing data in your
+                    <code>Express.js</code> application. Employing
+                    <strong><code>req.query</code></strong> to handle query
+                    strings provides flexibility in modifying the results of
+                    your requests. With query strings, you can fine-tune your
+                    data retrieval and cater to a wide range of user
+                    requirements. As you continue your journey in Express
+                    development, keep in mind that understanding query strings
+                    is pivotal for crafting dynamic and user-friendly web
+                    applications.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
