@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Put Request in Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Put Request in Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/xrMtklfzS-w"
+                    title="Put Request in Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to implement and test a PUT request in Express with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to create a <code>put</code> request
+                    to update an object in their data.
+                </p>
+                <p>
+                    A student will be able to test their route using
+                    <code>Postman</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Edit Functionality in Express: Updating Movie Data</h3>
+                <h4>Implementing the Edit Route</h4>
+                <p>
+                    To enable users to edit movie details, we'll create a
+                    <code>PUT</code> route. This route will take a movie's
+                    unique ID as a parameter and update the movie object with
+                    the provided data. Here's the code for the
+                    <code>PUT</code> route:
+                </p>
+                <pre><code class="language-jsx">
+app.put('/movies/:movieId', (req, res) => {
+    const movieId = req.params.movieId; // Get the movie ID from the request parameters.
+    const updatedObject = req.body; // Get the updated movie data from the request body.
+
+    // Find the index of the movie to be updated in the 'movies' array.
+    const movieIndex = movies.findIndex(movie => movie._id === movieId);
+
+    if (movieIndex !== -1) {
+        // If the movie is found, update its data.
+        const updatedMovie = Object.assign(movies[movieIndex], updatedObject);
+        res.send(updatedMovie);
+    } else {
+        // If the movie is not found, send an error response.
+        res.status(404).send('Movie not found');
+    }
+});
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Understanding the Edit Route</h3>
+                <p>Let's break down the code step by step:</p>
+                <ol class="custom-list">
+                    <li>
+                        We define a <code>PUT</code> route with the path
+                        <code>/movies/:movieId</code>. The
+                        <code>:movieId</code> part in the path is a URL
+                        parameter, which allows us to specify the ID of the
+                        movie to be updated.
+                    </li>
+                    <li>
+                        Inside the route handler, we retrieve the movie ID from
+                        the request parameters (<code>req.params.movieId</code>)
+                        and the updated movie data from the request body
+                        (<code>req.body</code>).
+                    </li>
+                    <li>
+                        We use the <code>Array.findIndex</code> method to find
+                        the index of the movie with the matching ID in the
+                        <code>movies</code> array.
+                    </li>
+                    <li>
+                        If the movie is found (i.e., <code>movieIndex</code> is
+                        not -1), we update the movie object by merging it with
+                        the updated data using <code>Object.assign</code>.
+                    </li>
+                    <li>We send the updated movie object as the response.</li>
+                    <li>
+                        If the movie is not found (i.e.,
+                        <code>movieIndex</code> is -1), we send a 404 status
+                        code along with an error message to indicate that the
+                        movie was not found.
+                    </li>
+                </ol>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

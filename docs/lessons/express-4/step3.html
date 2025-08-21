@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Middleware and Next</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Middleware and Next</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/9U1sdRIUD2Y"
+                    title="Middleware and Next Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining middleware and the next() function in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>A student will be able to explain middleware.</p>
+                <p>
+                    A student will be able to implement the
+                    <code>next()</code> keyword in their routes.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2016/04/middleman_banner.jpg"
+                    alt="Middleware banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    Before continuing with this post, make sure to check out the
+                    Express docs on
+                    <a
+                        href="http://expressjs.com/guide/writing-middleware.html"
+                        target="_blank"
+                        rel="noopener"
+                        >writing middleware</a
+                    >
+                    and
+                    <a
+                        href="http://expressjs.com/guide/using-middleware.html"
+                        target="_blank"
+                        rel="noopener"
+                        >using middleware</a
+                    >. They're pretty straightforward and fully-documented.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>What is Express middleware?</h3>
+                <p>
+                    Middleware is code (soft<strong>ware</strong>) that sits in
+                    between (in the <strong>middle</strong> of) the incoming
+                    request to the server and the outgoing response back to the
+                    client. It's basically a bunch of worker code that does a
+                    majority of the server's work in preparing a legitimate
+                    response back to the client. According to the Express docs:
+                </p>
+                <blockquote>
+                    <p>
+                        An Express application is essentially a series of
+                        middleware calls.
+                    </p>
+                </blockquote>
+                <p>
+                    In fact, by this point you've probably already used
+                    middleware perhaps without realizing it. For example:
+                </p>
+                <pre><code class="language-jsx">
+app.get("/", (req, res) => {
+    res.send("Hey there, client machine! Here's that response you asked for!");
+});
+            </code></pre>
+                <p>
+                    In that code, we set what's called the
+                    <em>mount path</em> in the first argument to
+                    <code>app.get()</code>, (<code>"/"</code>) and then we write
+                    what is essentially a middleware function that actually does
+                    something on that "mount path". In other words, anytime a
+                    request comes in to the specified mount path (in the above
+                    code to a url like <code>"http://localhost:5000"</code>,
+                    without any further specified path), the middleware function
+                    will run.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>use()</h3>
+                <p>
+                    While the code you write in functions like
+                    <code>app.get('mountPath', middlewareFunction)</code> is
+                    essentially middleware, you'll frequently see middleware
+                    defined separately in an <code>app.use()</code> method. This
+                    method specifies to the application that it should "use the
+                    following code on any request that matches the specified
+                    mount path, or if no mount path is specified, use the
+                    following code on <em>every</em> request that comes in to
+                    the app."
+                </p>
+                <pre><code class="language-jsx">
+const express = require("express");
+const app = express();
+
+app.use((req, res, next) => {
+    console.log("This line is called for every single request into this server, no matter to which endpoint");
+    next();
+});
+
+app.use("/", (req, res, next) => {
+    console.log("This also gets called on every request. There's no reason to specify a mount path of '/' in a .use() block, just omit it entirely.");
+    next();
+});
+
+app.use("/hot-cross-buns", (req, res, next) => {
+    console.log("This will only get called to a request to /hot-cross-buns. The other middleware with no mount path and '/' mount path will also run, since they run on every request");
+    next();
+});
+
+const port = process.env.PORT || 5000
+app.listen(port, () => {
+    console.log(`Express app is listening on port ${port}`);
+});
+            </code></pre>
+                <p>
+                    The more specific the mount path, the more specific of code
+                    you can run on requests to that url endpoint. This is
+                    extremely helpful to use when it comes to modularizing our
+                    code. For example, if there is code that we know we will
+                    want to run on every request, we might as well write it as
+                    middleware in an <code>app.use()</code> block with no mount
+                    path, and force every request to go through that code before
+                    it comes to any more specific code that needs to run it.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>next()</h3>
+                <p>
+                    Middleware executes sequentially, in the order you put it in
+                    the application's code. Each middleware block needs to end
+                    in one of 2 ways: <strong>1)</strong> By sending the
+                    response back to the client that made the request, or
+                    <strong>2)</strong> By calling the next middleware in the
+                    queue. (At some point or another, the response has to be
+                    sent back to the client.)
+                </p>
+                <p>
+                    This is where <code>next()</code> comes in. If you're not
+                    quite ready to send the response back yet, simply call
+                    <code>next()</code> at the end of the middleware function
+                    and it will continue on to the next one in line.
+                </p>
+                <p>
+                    Notice that you <em>will</em> need to include
+                    <code>next</code> as a third parameter in the middleware
+                    callback function in order to call <code>next()</code>.
+                </p>
+                <p>
+                    If I were to leave <code>next()</code> out of the code
+                    written above, the request would get hung up in the server
+                    and eventually time out. So it's important to keep
+                    <code>next()</code> in mind whenever you're planning on
+                    writing middleware.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Pre-built middleware</h3>
+                <p>
+                    Since Express is so bare-bones, it has abstracted out the
+                    main functionality that people almost always use to external
+                    middleware dependencies. In other words, if you want to do
+                    pretty much anything beyond handling GET requests that send
+                    back plain text, you're going to need to install/plug in
+                    some middleware that has already been written for you! Check
+                    out the
+                    <a
+                        href="http://expressjs.com/resources/middleware.html"
+                        target="_blank"
+                        rel="noopener"
+                        >Express Third-party middleware</a
+                    >
+                    page for a partial list of some very common third-party
+                    middlewares.
+                </p>
+                <p>
+                    Here is one of the most common middlewares you'll see in
+                    Express apps:
+                </p>
+                <pre><code class="language-jsx">
+const express = require("express");
+const app = express();
+
+// body-parser helps Express interpret different kinds of Content-Types that come in the body of a request object. So if you ever need to POST or PUT, you'll likely need to use the "body-parser" middleware
+const bodyParser = require("body-parser");
+
+// bodyParser.json() parses request bodies with a Content-Type header set to "application/json", meaning it can now read and interpret JSON.
+app.use(bodyParser.json());
+
+// bodyParser.urlencoded() parses data that comes in with a Content-Type of application/x-www-form-urlencoded, which is what data comes in as when you use an HTML &lt;form&gt; to submit data. For now, don't worry about the extended option, just plan on always including it here.
+app.use(bodyParser.urlencoded({extended: true}));
+
+const port = process.env.PORT || 5000
+app.listen(port, () => {
+    console.log(`Express app is listening on port ${port}`);
+});
+            </code></pre>
+                <p>
+                    The concept of middleware can take a little time to get used
+                    to, but once you understand what's going on and can begin
+                    thinking like the server that's running this code, you'll be
+                    much more equipped to create a clean, well-organized, and
+                    powerful codebase for your server.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Delete Request in Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Delete Request in Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/YXVAI-QVJUQ"
+                    title="Delete Request in Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to implement and test a DELETE request in Express with Postman"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to implement a
+                    <code>delete</code> request and test it using
+                    <code>Postman</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Handling DELETE Requests in Express.js</h3>
+                <p>
+                    In web development, handling <code>DELETE</code> requests is
+                    an essential part of building RESTful APIs and maintaining
+                    data integrity. <code>Express.js</code>, a popular
+                    <code>Node.js</code> framework, provides a straightforward
+                    way to implement <code>DELETE</code> functionality for your
+                    web applications. In this article, we'll explore how to
+                    create a basic <code>DELETE</code> request using
+                    <code>Express.js</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>The Code</h3>
+                <p>
+                    In the code snippet below, we have an
+                    <code>Express.js</code> application that manages a list of
+                    movies. The application uses a RESTful API structure to
+                    interact with these movies. Here's how we handle the
+                    <code>DELETE</code> request for a movie:
+                </p>
+                <pre><code class="language-jsx">
+const express = require('express');
+const app = express();
+const { v4: uuidv4 } = require('uuid');
+
+// Fake Data
+const movies = [
+    { title: 'Die Hard', genre: 'Action', _id: uuidv4() },
+    { title: 'Star Wars IV', genre: 'Fantasy', _id: uuidv4() },
+    { title: 'The Lion King', genre: 'Fantasy', _id: uuidv4() },
+    { title: 'Friday the 13th', genre: 'Horror', _id: uuidv4() }
+];
+
+app.delete('/movies/:movieId', (req, res, next) => {
+    const movieId = req.params.movieId;
+    const movieIndex = movies.findIndex(movie => movie._id === movieId);
+    movies.splice(movieIndex, 1);
+    res.send('Successfully deleted movie!');
+});
+
+app.listen(9000, () => {
+    console.log('The server is running on Port 9000');
+});
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Explanation</h3>
+                <p>
+                    In this code, we've set up an <code>Express.js</code> server
+                    that manages a list of movies. The
+                    <code>DELETE</code> request is used to remove a movie from
+                    the list. Here's a breakdown of the key parts of the code:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        We define a route for handling
+                        <code>DELETE</code> requests using
+                        <code>app.delete('/movies/:movieId', ...)</code>. The
+                        <code>:movieId</code> part is a URL parameter that
+                        allows us to specify which movie to delete based on its
+                        unique identifier.
+                    </li>
+                    <li>
+                        Inside the route handler function, we extract the
+                        <code>movieId</code> from the URL parameters using
+                        <code>req.params.movieId</code>.
+                    </li>
+                    <li>
+                        We search for the index of the movie to delete in the
+                        <code>movies</code> array using the
+                        <code>findIndex</code> method.
+                    </li>
+                    <li>
+                        If the movie is found, we use the
+                        <code>splice</code> method to remove it from the
+                        <code>movies</code> array, and we respond with a
+                        "Successfully deleted movie!" message.
+                    </li>
+                </ol>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    Handling <code>DELETE</code> requests in
+                    <code>Express.js</code> is a fundamental skill for building
+                    web applications and APIs. With the provided example, you
+                    can create endpoints to delete specific resources based on
+                    their unique identifiers. As you continue to explore
+                    <code>Express.js</code> and RESTful API development, this
+                    knowledge will be valuable in managing and manipulating your
+                    data effectively.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

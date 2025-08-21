@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todo Backend</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="assignment-header">
+            <header class="slide-header">
+                <h1 id="assignment-header">Todo Backend</h1>
+                <h2>Assignment</h2>
+            </header>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Objectives</h3>
+                <p>
+                    Create a simple Express Server that manages a list of todos
+                    (which at this point will just be held in an array on the
+                    server, since we haven't gotten to including databases yet).
+                </p>
+                <p>Todos should have a data format similar to:</p>
+                <pre><code class="language-jsx">
+{
+    "name": "The name",
+    "description": "The description of the todo"
+    "imageUrl": "http://www.myimage...."
+    "completed": false
+    "_id": "23k4lh23h2"
+}
+            </code></pre>
+                <p>Create endpoints that:</p>
+                <ul class="custom-list">
+                    <li>
+                        allows new todo items to be posted to the array,
+                        <ul class="custom-list">
+                            <li>
+                                When posting a new todo, you must generate a
+                                unique id for that todo (consider using the
+                                <code>uuid</code> npm package),
+                            </li>
+                        </ul>
+                    </li>
+                    <li>returns the entire list of todos,</li>
+                    <li>
+                        allows the user to update a todo by its
+                        <code>_id</code>,
+                    </li>
+                    <li>
+                        allows the user to delete a todo by its
+                        <code>_id</code>,
+                    </li>
+                    <li>
+                        allows the user retrieve a single todo by its
+                        <code>_id</code>.
+                    </li>
+                </ul>
+                <p>
+                    When posting a new todo, you must generate a unique id for
+                    that todo (consider using the <code>uuid</code> npm package
+                    - <code>npm install uuid</code> and check the
+                    <a
+                        href="https://www.npmjs.com/package/uuid"
+                        target="_blank"
+                        rel="noopener"
+                        >docs</a
+                    >
+                    to see how to use it. It's as simple as requiring the
+                    package and running <code>uuid.v4()</code>).
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

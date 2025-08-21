@@ -3,13 +3,33 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bounty Hunter Part 1</title>
+        <title>Bounty Hunter Part 2</title>
         <link rel="stylesheet" href="styles.css" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 20px 0;
+            }
+            th,
+            td {
+                border: 1px solid #e5e7eb;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #1a2a44;
+                color: #ffffff;
+            }
+            td {
+                background-color: #ffffff;
+            }
+        </style>
     </head>
     <body>
         <div
@@ -17,14 +37,14 @@
             role="region"
             aria-labelledby="assignment-header">
             <header class="slide-header">
-                <h1 id="assignment-header">Bounty Hunter Part 1</h1>
+                <h1 id="assignment-header">Bounty Hunter Part 2</h1>
                 <h2>Assignment</h2>
             </header>
 
             <hr class="section-divider" />
 
             <div class="section">
-                <h3>Description</h3>
+                <h3>Overview</h3>
                 <p>
                     You are a bounty hunter of the Old Republic. Your parents
                     were killed by a Sith Lord as a child and your goal in life
@@ -36,12 +56,6 @@
                     programming so you can keep track of your bounties and
                     kills!
                 </p>
-            </div>
-
-            <hr class="section-divider" />
-
-            <div class="section">
-                <h3>Objective</h3>
                 <p>
                     Using <code>Express</code>, create an API on the
                     <code>/bounty</code> route that:
@@ -92,37 +106,34 @@
 
             <div class="section">
                 <h3>
-                    Requirements for Part 1 - Server Setup and
-                    <code>GET</code> and <code>POST</code> Routes
+                    Objective for PART 2 - Adding <code>PUT</code>,
+                    <code>GET ONE</code> &
+                    <code>DELETE</code>
                 </h3>
                 <p>
-                    Since we don't have a <em>good</em> way to tell the server
-                    which item we want to <code>PUT</code> and
-                    <code>DELETE</code> yet, we'll start out just by writing the
-                    <code>GET</code> and <code>POST</code> endpoints.
+                    After learning about <code>req.params</code>, now add
+                    endpoints that allow you to:
                 </p>
                 <ul class="custom-list">
                     <li>
-                        Write a <code>GET</code> endpoint that gets all bounties
-                        from the array and sends them to the client.
+                        <code>DELETE</code> a bounty from the bounties array,
+                        and
                     </li>
+                    <li><code>PUT</code> (update) an existing bounty.</li>
                     <li>
-                        Write a <code>POST</code> endpoint that adds a new
-                        bounty object to the array of bounties.
-                        <ul class="custom-list">
-                            <li>
-                                Remember, you'll have to play the part of the
-                                database and add an <code>id</code> property to
-                                the incoming bounty before saving it to the
-                                array of bounties. This way you'll be able to
-                                easily look it up by its
-                                <code>id</code> property in order to update and
-                                delete it later.
-                            </li>
-                        </ul>
+                        <code>GET (ONE)</code>: get just one single bounty
+                        instead of all the bounties
                     </li>
                 </ul>
+                <p>
+                    You'll need to pass the <code>uuid</code> you added when
+                    <code>POST</code>ing new bounties as a URL Parameter to the
+                    endpoint in order to have a reference to the object you want
+                    to update, get or delete.
+                </p>
             </div>
+
+            <hr class="section-divider" />
 
             <div class="section">
                 <h3>DEMO OF COMPLETED ASSIGNMENT</h3>
@@ -133,9 +144,50 @@
                         height="720"
                         style="border: 0"
                         scrolling="no"
-                        src="https://go.screenpal.com/player/cTjYYqn2xuW?controls=1&share=1&download=1&embed=1&cl=1&width=1280&height=720&overlays=1&ff=1"
+                        src="https://go.screenpal.com/player/cTjY3Vn2x5h?controls=1&share=1&download=1&embed=1&cl=1&width=1280&height=720&overlays=1&ff=1"
                         allowfullscreen="true"></iframe>
                 </div>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Task Rubric</h3>
+                <table role="grid">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Level 1: Emerging</th>
+                            <th>Level 2: Developing</th>
+                            <th>Level 3: Proficient</th>
+                            <th>Level 4: Mastery</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PUT, GET (ONE) and DELETE handlers</td>
+                            <td>
+                                Express router is not used. Logic to edit and
+                                delete bounties from the array is flawed.
+                                <code>req.params</code> and
+                                <code>req.body</code> not used correctly
+                            </td>
+                            <td>
+                                Issues with assigning ID’s and minor flaws in
+                                logic for deleting and updating bounties.
+                            </td>
+                            <td>
+                                ID’s are assigned correctly and logic to update
+                                and delete works. Minor issues with code
+                                organization and naming
+                            </td>
+                            <td>
+                                ID’s are assigned correctly and logic to update
+                                and delete works. Code is well organized and DRY
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <footer class="slide-footer"></footer>

@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
+const addRequestTime = require('./middleware/customMiddleware');
 
 // 2. Define the server port
 const PORT = 3000;
@@ -28,12 +29,18 @@ let bounties = [
 
 // 4. Middleware to parse JSON
 app.use(express.json());
+app.use(addRequestTime);
 
 // 5. Define the Routes
 
 // GET all bounties
 app.get('/bounty', (req, res) => {
-    res.send(bounties);
+    const response = {
+        bounties,
+        timeOfRequest: req.requestTime
+    };
+
+    res.send(response);
 });
 
 app.get('/bounty/:id', (req, res) => {
