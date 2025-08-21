@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bounty Hunter Part 3</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="assignment-header">
+            <header class="slide-header">
+                <h1 id="assignment-header">Bounty Hunter Part 3</h1>
+                <h2>Assignment</h2>
+            </header>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Overview</h3>
+                <p>
+                    You are a bounty hunter of the Old Republic. Your parents
+                    were killed by a Sith Lord as a child and your goal in life
+                    is to kill all the Sith and Jedi.
+                </p>
+                <p>
+                    In order to help you in your quest, and since you are a
+                    do-it-yourself kind of bounty hunter, you have learned
+                    programming so you can keep track of your bounties and
+                    kills!
+                </p>
+                <p>
+                    Using <code>Express</code>, create an API on the
+                    <code>/bounty</code> route that:
+                </p>
+                <ol class="custom-list">
+                    <li><code>GET</code>s a list of all bounties</li>
+                    <li><code>POST</code>s new bounties,</li>
+                    <li><code>DELETE</code>s a bounty</li>
+                    <li><code>PUT</code>s (updates) a bounty</li>
+                </ol>
+                <p>
+                    Since we haven't started connecting to
+                    <code>MongoDB</code> quite yet, you can just save your
+                    bounties in a <code>bounties</code> array in your server
+                    code. Keep in mind that since it isn't being persisted
+                    anywhere, anytime you make a change to your server code and
+                    restart the server, you'll lose all your bounties.
+                </p>
+                <p>A bounty object should have:</p>
+                <ul class="custom-list">
+                    <li>First Name</li>
+                    <li>Last Name</li>
+                    <li>Living (Boolean)</li>
+                    <li>Bounty Amount (number)</li>
+                    <li>Type (‘Sith’ or ‘Jedi’)</li>
+                    <li>
+                        ID (a unique identifier. Use the
+                        <code>uuid</code> package to generate unique ids. -
+                        <code>npm install uuid</code> and check the
+                        <a
+                            href="https://www.npmjs.com/package/uuid"
+                            target="_blank"
+                            rel="noopener"
+                            >docs</a
+                        >
+                        to see how to use it. It's as simple as requiring the
+                        package and running <code>uuid.v4()</code>)
+                    </li>
+                </ul>
+                <p>
+                    Since there isn't a front end set up yet, you'll just use
+                    <code>Postman</code> to interact with the server and update
+                    the data.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Objective for PART 3 - Client Setup</h3>
+                <p>
+                    For this part you will have to
+                    <a
+                        href="https://coursework.vschool.io/setting-up-a-full-stack-react-application/"
+                        target="_blank"
+                        rel="noopener"
+                        >set up a full stack React application</a
+                    >. Since you do not have a database yet, ignore the
+                    <code>/models</code> folder contained in the example. You
+                    instead will have something like
+                    <code>bountyData.js</code> which contains your data.
+                </p>
+                <p>
+                    You will now build a client-side React interface for the
+                    server you created!
+                </p>
+                <p>
+                    Your app should be a CRUD application - it should be able
+                    to:
+                </p>
+                <ul class="custom-list">
+                    <li>Create (<code>POST</code>) new bounties,</li>
+                    <li>
+                        Read (<code>GET</code>) existing bounties and show them
+                        to the user of your site,
+                    </li>
+                    <li>
+                        Update (<code>PUT</code>) existing bounties (e.g. if you
+                        wanted to up the price for a bounty), and
+                    </li>
+                    <li>
+                        Destroy (<code>DELETE</code>) bounties from the list of
+                        all bounties.
+                    </li>
+                </ul>
+                <p>
+                    You will need to use everything you've learned about state
+                    management, HTTP, and forms!
+                </p>
+                <p>The design is up to you, so have fun with it!</p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

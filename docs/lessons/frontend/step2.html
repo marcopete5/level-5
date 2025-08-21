@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Connecting Frontend to Backend</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+        <style>
+            .aside {
+                border: 2px solid #00aeef;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 8px;
+                background-color: #e5e7eb;
+            }
+        </style>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Connecting Frontend to Backend</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/QfB9hxEEKFM?list=PL1whVIy6oz7PXKvf9ivEtmXbkR7-QOa0I"
+                    title="Connecting Frontend to Backend Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to connect a frontend to a backend using a proxy"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <div class="aside">
+                    <p>
+                        👉🏼 This lesson is using create-react-app, to set up a
+                        proxy in vite is different, the instructions for doing
+                        so are underneath the video lesson.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to connect their back-end to their
+                    front-end using a proxy.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>VITE</h3>
+                <p>
+                    When connecting your backend to your frontend using VITE,
+                    you will need to add the proxy manually to the
+                    <code>vite.config</code> file instead of the
+                    <code>package.json</code> like Create-React-App in the video
+                    above. Use the below <code>vite.config</code> file as a
+                    reference to do this and use <code>/api</code> for all
+                    routing. Please do not hesitate to ask for help or
+                    clarification on this as needed.
+                </p>
+                <p><strong>vite.Config file</strong></p>
+                <pre><code class="language-jsx">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+});
+            </code></pre>
+                <p>
+                    <strong>vite front end</strong> - any request to the backend
+                    will begin with "<code>/api</code>" (from the
+                    <code>vite.config</code> file) see below example
+                </p>
+                <pre><code class="language-jsx">
+axios.get("/api/chores")
+            </code></pre>
+                <p>
+                    <strong>backend request routing using Vite</strong> - any
+                    request from the front end will use the "<code>/api</code>"
+                    endpoint for routing - see below example
+                </p>
+                <pre><code class="language-jsx">
+app.use("/api/chores", require("./routes/choresRouter.js"))
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>IMPORTANT NOTE // HEADS UP</h3>
+                <p>
+                    In level 6, the "<code>/api</code>" endpoint is also used
+                    for authorization. We can change "<code>/api</code>" to
+                    "<code>/protected</code>" or whatever we want as the
+                    endpoint or add an additional "<code>/api</code>" like this
+                </p>
+                <pre><code class="language-jsx">
+app.use("/api/api/chores", require("./routes/choresRouter.js"))
+            </code></pre>
+                <p>or</p>
+                <pre><code class="language-jsx">
+app.use("/api/protected/chores", require("./routes/choresRouter.js"))
+            </code></pre>
+                <p>
+                    Just stay consistent between frontend and backend. Do not
+                    stress this at this point. This is merely a HEADS UP!
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

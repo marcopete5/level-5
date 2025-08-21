@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Install Morgan</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Install Morgan</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/or6ZpWw-MfI"
+                    title="Install Morgan Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to implement Morgan middleware in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to implement <code>Morgan</code> into
+                    their project.
+                </p>
+                <p>
+                    A student will be able to explain the purpose
+                    <code>Morgan</code> has to them in back-end development.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Understanding Morgan Middleware in Express.js</h3>
+                <h4>Introduction</h4>
+                <p>
+                    <a
+                        href="https://www.npmjs.com/package/morgan"
+                        target="_blank"
+                        rel="noopener"
+                        >Morgan</a
+                    >
+                    is a powerful middleware for <code>Node.js</code> commonly
+                    used in backend web development with
+                    <code>Express.js</code>. It enhances the logging and
+                    debugging capabilities of web applications.
+                    <code>Morgan</code> helps developers monitor and
+                    troubleshoot their applications by providing detailed
+                    information about incoming HTTP requests and server
+                    responses.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h4>Using Morgan in Backend Development</h4>
+                <p>
+                    <code>Morgan</code> is typically integrated into the
+                    middleware stack of an <code>Express.js</code> application
+                    to log HTTP request and response information. Here's how it
+                    is used:
+                </p>
+                <ol class="custom-list">
+                    <li>
+                        <strong>Logging HTTP Requests:</strong>
+                        <code>Morgan</code> logs crucial information about
+                        incoming HTTP requests, such as the HTTP method, URL,
+                        status code, and response time. This feature is
+                        invaluable for debugging and monitoring application
+                        behavior.
+                    </li>
+                    <li>
+                        <strong>Customizable Logging Format:</strong>
+                        <code>Morgan</code> offers flexibility in defining the
+                        logging format. You can configure it to log data in a
+                        format that aligns with your requirements, whether it's
+                        human-readable, JSON, or another preferred format.
+                    </li>
+                    <li>
+                        <strong>Logging Levels:</strong>
+                        <code>Morgan</code> provides various logging levels,
+                        enabling you to categorize and filter the information
+                        you want to log. Common levels include
+                        <code>'dev'</code>, <code>'tiny'</code>,
+                        <code>'common'</code>, and <code>'combined'</code>.
+                    </li>
+                </ol>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h4>Understanding the 'dev' Logging Level</h4>
+                <p>
+                    The <code>'dev'</code> logging level is particularly useful
+                    during the development phase of an application. It offers a
+                    concise and development-friendly format for request logs.
+                    When using <code>morgan('dev')</code>, the following
+                    information is logged for each request:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <strong>HTTP Method:</strong> The HTTP method used in
+                        the request, e.g., <code>GET</code>, <code>POST</code>,
+                        <code>PUT</code>, <code>DELETE</code>.
+                    </li>
+                    <li>
+                        <strong>URL Path:</strong> The URL path of the incoming
+                        request, indicating the endpoint being accessed.
+                    </li>
+                    <li>
+                        <strong>HTTP Status Code:</strong> The HTTP status code
+                        returned by the server, signifying the result of the
+                        request (e.g., <code>200</code> for success).
+                    </li>
+                    <li>
+                        <strong>Response Time:</strong> The response time in
+                        milliseconds, providing insight into the server's
+                        performance.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h4>Example 'dev' Format Log Entry</h4>
+                <p>
+                    Here's an example of what a log entry might look like when
+                    using the <code>'dev'</code> format:
+                </p>
+                <pre><code class="language-text">
+GET /api/products 200 15.652 ms
+            </code></pre>
+                <p>In this log entry:</p>
+                <ul class="custom-list">
+                    <li>"<code>GET</code>" is the HTTP method.</li>
+                    <li>"<code>/api/products</code>" is the URL path.</li>
+                    <li>
+                        "<code>200</code>" is the HTTP status code (indicating
+                        success).
+                    </li>
+                    <li>
+                        "<code>15.652 ms</code>" is the response time in
+                        milliseconds.
+                    </li>
+                </ul>
+                <p>
+                    This format helps developers quickly identify and address
+                    potential issues or performance bottlenecks during the
+                    development phase of their application.
+                </p>
+                <p>
+                    <code>Morgan</code> is a valuable tool for backend
+                    developers, offering a clear and efficient way to log and
+                    monitor HTTP requests and responses in
+                    <code>Express.js</code> applications. By customizing the
+                    logging format and level, developers can adapt
+                    <code>Morgan</code> to their specific needs, improving the
+                    debugging and monitoring capabilities of their applications.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
