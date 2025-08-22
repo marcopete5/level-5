@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
-const addRequestTime = require('./middleware/customMiddleware');
+const cors = require('cors');
 
 // 2. Define the server port
 const PORT = 3000;
@@ -12,7 +12,7 @@ let bounties = [
     {
         firstName: 'Darth',
         lastName: 'Maul',
-        living: true,
+        status: 'Alive', // Replaced 'living' with 'status'
         bountyAmount: 50000,
         type: 'Sith',
         _id: uuidv4()
@@ -20,35 +20,22 @@ let bounties = [
     {
         firstName: 'Obi-Wan',
         lastName: 'Kenobi',
-        living: true,
+        status: 'Alive', // Replaced 'living' with 'status'
         bountyAmount: 75000,
         type: 'Jedi',
         _id: uuidv4()
     }
 ];
 
-// 4. Middleware to parse JSON
+// 4. Middleware
 app.use(express.json());
-app.use(addRequestTime);
+app.use(cors());
 
 // 5. Define the Routes
 
 // GET all bounties
 app.get('/bounty', (req, res) => {
-    const response = {
-        bounties,
-        timeOfRequest: req.requestTime
-    };
-
-    res.send(response);
-});
-
-app.get('/bounty/:id', (req, res) => {
-    const bountyId = req.params.id;
-
-    // Find the index of the bounty with the matching ID
-    const bounty = bounties.find((bounty) => bounty._id === bountyId);
-    res.send(bounty);
+    res.send(bounties);
 });
 
 // POST a new bounty
@@ -61,37 +48,21 @@ app.post('/bounty', (req, res) => {
 
 // DELETE a bounty
 app.delete('/bounty/:bountyId', (req, res) => {
-    // Get the ID from the request parameters
     const bountyId = req.params.bountyId;
-
-    // Find the index of the bounty with the matching ID
     const bountyIndex = bounties.findIndex((bounty) => bounty._id === bountyId);
-
-    // Remove the bounty from the array
     bounties.splice(bountyIndex, 1);
-
-    // Send a confirmation message
     res.send('Successfully deleted the bounty!');
 });
 
 // PUT (update) a bounty
 app.put('/bounty/:bountyId', (req, res) => {
-    // Get the ID from the request parameters
     const bountyId = req.params.bountyId;
-
-    // Get the updated bounty data from the request body
     const updatedBountyData = req.body;
-
-    // Find the index of the bounty with the matching ID
     const bountyIndex = bounties.findIndex((bounty) => bounty._id === bountyId);
-
-    // Use Object.assign to update the existing bounty with the new data
     const updatedBounty = Object.assign(
         bounties[bountyIndex],
         updatedBountyData
     );
-
-    // Send back the updated bounty
     res.send(updatedBounty);
 });
 

@@ -1,0 +1,122 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+.app-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Orbitron', sans-serif; /* A sci-fi font */
+    color: #ffd700; /* Gold color */
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Form Styling */
+.bounty-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.bounty-form input,
+.bounty-form select {
+    padding: 10px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.bounty-form button {
+    grid-column: 1 / -1;
+    padding: 12px;
+    background-color: #ffd700;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.bounty-form button:hover {
+    background-color: #f0c400;
+}
+
+/* Bounties List */
+.bounties-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Individual Bounty Card */
+.bounty-card {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 5px solid;
+}
+
+.bounty-card.sith {
+    border-color: #d93030;
+} /* Red for Sith */
+.bounty-card.jedi {
+    border-color: #30a0d9;
+} /* Blue for Jedi */
+
+.bounty-card h1 {
+    margin-top: 0;
+}
+
+.bounty-amount {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.card-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.card-buttons button,
+.close-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid;
+}
+
+.delete-btn {
+    background-color: #d93030;
+    color: white;
+    border-color: #d93030;
+}
+.edit-btn {
+    background-color: #30a0d9;
+    color: white;
+    border-color: #30a0d9;
+}
+.close-btn {
+    background-color: #666;
+    color: white;
+    border-color: #666;
+    margin-top: 10px;
+}
