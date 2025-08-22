@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Error Handling</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+        <style>
+            blockquote {
+                border-left: 4px solid #00aeef;
+                padding-left: 10px;
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Error Handling</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/EmOFpelXkFA?list=PL1whVIy6oz7PXKvf9ivEtmXbkR7-QOa0I"
+                    title="Error Handling Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to set up error handling middleware in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to set up an error handler middleware
+                    in their server file.
+                </p>
+                <p>
+                    A student will be able to explain the use of the
+                    <code>next</code> keyword in their routes to access the
+                    error handler.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://images.unsplash.com/photo-1523215122-26803239f41f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ&s=561f925629b842fec951a14ea6037fa6"
+                    alt="Error handling illustration"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Introduction</h3>
+                <p>
+                    <code>Express</code> is a very lightweight framework that
+                    allows you to do things however you want. This makes it very
+                    flexible, but also means you could write a less-than-optimal
+                    server without knowing it.
+                </p>
+                <p>
+                    Error handling is an important task for your server to
+                    accomplish. If you don't gracefully handle errors, it could
+                    lead to a bad user experience at best and could crash your
+                    server or compromise data at worst.
+                </p>
+                <p>
+                    Fortunately, <code>Express</code> makes handling errors a
+                    cinch! Let's dive in.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Setup</h3>
+                <p>
+                    For the sake of brevity and clarity, we'll be doing
+                    everything in a single server file (<code>index.js</code>)
+                    and bypassing a lot of the unrelated setup steps you should
+                    take. Normally you'll have routes, possibly with further
+                    nested routes, but the process for handling errors will be
+                    exactly the same no matter what your setup is.
+                </p>
+                <p>Here's our starter code:</p>
+                <pre><code class="language-jsx">
+const express = require("express")
+const app = express()
+
+app.get("/puppies", (req, res) => {
+    // some synchronous operation will go here
+})
+
+app.post("/puppies", (req, res) => {
+    // some async operation will go here
+})
+
+app.listen(8000, () => {
+    console.log("Server is running on port 8000");
+});
+            </code></pre>
+                <p>
+                    We've created 2 endpoints - a <code>GET</code> to
+                    <code>/puppies</code> (presumably to get a list of puppies)
+                    and a <code>POST</code> to <code>/puppies</code> for
+                    creating a new instance of a puppy.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Handling errors</h3>
+                <p>
+                    <code>Express</code> has a built-in error handling function.
+                    The problem is that it's built to send an HTML document back
+                    to the client with the error written in the document. If
+                    you're using <code>Express</code> to build a REST API that
+                    should just be sending JSON back, this won't do.
+                </p>
+                <p>
+                    So <code>Express</code> has made it very easy to create a
+                    custom error handling function of your own. All you need to
+                    do is create a middleware function <em>directly</em> before
+                    your final lines of code in the <code>app.listen</code>.
+                    Putting it right above that last part of your server ensures
+                    that it only runs as a last resort, if all other routes have
+                    failed to send a response back.
+                </p>
+                <h4>Custom error handling middleware</h4>
+                <p>
+                    Let's see what this error handling function could look like
+                    and then we'll talk about it:
+                </p>
+                <pre><code class="language-jsx">
+...
+app.use((err, req, res, next) => {
+    console.error(err);
+    return res.send("There was an error")
+});
+
+app.listen(8000, () => {
+    console.log("Server is running on port 8000");
+});
+            </code></pre>
+                <p>
+                    This error handling function <em>must</em> have exactly 4
+                    parameters: <code>err</code>, <code>req</code>,
+                    <code>res</code>, and <code>next</code>. (<code
+                        >Express</code
+                    >
+                    checks the number of parameters of its middleware functions.
+                    If it has 4 arguments it assumes it is an error handling
+                    middleware.) So whether you're planning on using them all or
+                    not, make sure to include all 4.
+                </p>
+                <p>
+                    We'll come back briefly to improve this, but for now let's
+                    see how you can forward errors on to this middleware
+                </p>
+                <h4>Passing errors to the error handling middleware</h4>
+                <p>
+                    From any route, you can easily pass errors along to the
+                    error handling middleware by using the
+                    <code>next</code> parameter. In our starter code, we didn't
+                    include the <code>next</code> parameter, so let's add it
+                    now:
+                </p>
+                <pre><code class="language-jsx">
+app.get("/puppies", (req, res, next) => {...
+
+app.post("/puppies", (req, res, next) => {...
+            </code></pre>
+                <h4>Handling synchronous errors</h4>
+                <p>
+                    Notice we made a distinction between a synchronous operation
+                    and an asynchronous operation in the route. That's because
+                    <code>Express</code> can handle errors in sync operations in
+                    an even more simple way - just <em>throw</em> the error! If
+                    an error is thrown, <code>Express</code> will catch it and
+                    pass it along to your error handling middleware for you.
+                </p>
+                <pre><code class="language-jsx">
+app.get("/puppies", (req, res, next) => {
+    if (req.query.someRequiredQuery === undefined) {
+        throw new Error("You must include a query called `someRequiredQuery` in your request!")
+    }
+})
+            </code></pre>
+                <p>
+                    In the above example, we can synchronously check if the
+                    incoming request has a <code>query</code> called
+                    <code>someRequiredQuery</code>. If not, <em>throw</em> a new
+                    error with a helpful message.
+                    <strong
+                        >This message will often end up being the one that is
+                        displayed to the user to let them know what went
+                        wrong</strong
+                    >.
+                </p>
+                <p>
+                    If you try running a <code>GET</code> in postman to
+                    <code>localhost:8000/puppies</code>. It's working! Our error
+                    handling function is sending back the text "There was an
+                    error".
+                </p>
+                <img
+                    src="https://coursework.vschool.io/content/images/2018/09/Screen-Shot-2018-09-27-at-2.11.58-PM.png"
+                    alt="Postman error response screenshot 1"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    But you'll also see a couple of issues: First of all, our
+                    response has a <code>200</code> status, which it shouldn't
+                    (because <em>everything is NOT "OK"</em>!). Second, we're
+                    not responding with the message from our error. As we said
+                    earlier, we'll be revisiting the error handling function to
+                    improve it later.
+                </p>
+                <h4>Handling asynchronous errors</h4>
+                <p>
+                    If you're performing some kind of async operation and run in
+                    to an error, you won't be able to just <em>throw</em> an
+                    error. Instead, you'll simple pass the error forward using
+                    the <code>next</code> parameter. It's very simple:
+                </p>
+                <pre><code class="language-jsx">
+app.post("/puppies", (req, res, next) => {
+    SomeAsyncOperation
+        .then(response => {console.log("Everything worked out fine")})
+        .catch(err => {
+            // pass the error forward. If it's an instance
+            // of a native js Error, it will be forwarded
+            // to your error handler automatically!
+            next(err);
+        })
+})
+            </code></pre>
+                <p>
+                    If <code>Express</code> determines the thing you're passing
+                    forward with <code>next()</code> is an instance of an
+                    <code>Error</code>, it will bypass any other middleware and
+                    send it directly to your error handling middleware.
+                </p>
+                <blockquote>
+                    <p>
+                        In the above example, be aware that you'll want to make
+                        sure to check the <code>err</code> object's
+                        <code>message</code> property if it will be sent to the
+                        client. We'll talk more about that later.
+                    </p>
+                </blockquote>
+                <h4>Setting an appropriate response status</h4>
+                <p>
+                    Let's quickly fix the problem where we're sending
+                    <code>200</code> statuses back. Because the
+                    <code>res</code> object is a singleton (it's the same object
+                    everywhere you come across it in <code>Express</code>), we
+                    can set the status before passing our error forward to the
+                    error handling middleware:
+                </p>
+                <pre><code class="language-jsx">
+app.get("/puppies", (req, res, next) => {
+    if (req.query.someRequiredQuery === undefined) {
+        res.status(400)
+        throw new Error("You must include a query called `someRequiredQuery` in your request!")
+    }
+})
+
+app.post("/puppies", (req, res, next) => {
+    SomeAsyncOperation
+        .then(response => {console.log("Everything worked out fine")})
+        .catch(err => {
+            res.status(500)
+            next(err);
+        })
+})
+            </code></pre>
+                <p>
+                    This way, our error handling function doesn't need to try
+                    and determine what status code should be sent.
+                </p>
+                <h4>Sending the right error message to the client</h4>
+                <p>
+                    If you ensure that you're sending an actual
+                    <code>Error</code> object to the error handling middleware
+                    (could be any of
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Error_types"
+                        target="_blank"
+                        rel="noopener"
+                        >JavaScript's native error types</a
+                    >), it will have a property called <code>message</code>.
+                    That message is the text you (or the 3rd party library that
+                    had an error) set on the error when creating it:
+                </p>
+                <pre><code class="language-jsx">
+const myErr = new Error("This is my message");
+console.log(myErr.message);  // "This is my message"
+            </code></pre>
+                <p>
+                    Let's make all error responses we send back from the server
+                    have the same "shape":
+                </p>
+                <pre><code class="language-jsx">
+app.use((err, req, res, next) => {
+    console.error(err);
+    return res.send({error: err.message})
+});
+            </code></pre>
+                <blockquote>
+                    <p>
+                        The property of the object you're sending back doesn't
+                        have to be called <code>error</code>, you can choose
+                        anything you want. However, the actual error object has
+                        a built-in property called <code>message</code> so you
+                        can't change that part.
+                    </p>
+                </blockquote>
+                <p>
+                    Now when we make our <code>GET</code> request without
+                    including the <code>someRequiredQuery</code> query, we get
+                    this:
+                </p>
+                <img
+                    src="https://coursework.vschool.io/content/images/2018/09/Screen-Shot-2018-09-27-at-2.33.39-PM.png"
+                    alt="Postman error response screenshot 2"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    The status is set to <code>400</code> and the error message
+                    is what we expected it to be.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    Make sure to include these practices in your
+                    <code>Express</code> apps so you can gracefully handle
+                    errors that may pop up in your application.
+                </p>
+                <p>
+                    If you're using a 3rd-party library that passes errors down,
+                    you may want to format the messages from those errors
+                    yourself so they're more helpful to the client. E.g.
+                    <code>Mongoose</code> gives you the ability to do this in a
+                    <a
+                        href="https://mongoosejs.com/docs/middleware.html#error-handling"
+                        target="_blank"
+                        rel="noopener"
+                        >post-save hook</a
+                    >
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

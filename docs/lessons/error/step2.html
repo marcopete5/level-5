@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adding Status Codes</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Adding Status Codes</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/6RoD7lZwzW4?list=PL1whVIy6oz7PXKvf9ivEtmXbkR7-QOa0I"
+                    title="Adding Status Codes Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to set HTTP status codes in Express routes"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to set status codes inside their
+                    express routes.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Common HTTP Status Codes in Backend Development</h3>
+                <p>
+                    Understanding HTTP status codes is essential for handling
+                    responses in web applications. These codes indicate the
+                    outcome of an HTTP request made to a web server. Here are
+                    some commonly used status codes:
+                </p>
+                <h4>Informational (1xx):</h4>
+                <ul class="custom-list">
+                    <li>
+                        <strong><code>100 Continue</code>:</strong> The server
+                        has received the initial part of the request and is
+                        willing to continue processing.
+                    </li>
+                    <li>
+                        <strong><code>101 Switching Protocols</code>:</strong>
+                        The server has agreed to switch protocols, such as
+                        upgrading to WebSocket.
+                    </li>
+                </ul>
+                <h4>Successful (2xx):</h4>
+                <ul class="custom-list">
+                    <li>
+                        <strong><code>200 OK</code>:</strong> The request was
+                        successful, and the server returns the requested data.
+                    </li>
+                    <li>
+                        <strong><code>201 Created</code>:</strong> The request
+                        was fulfilled, and a new resource has been created as a
+                        result.
+                    </li>
+                    <li>
+                        <strong><code>204 No Content</code>:</strong> The
+                        request was successful, but no data is returned in the
+                        response body.
+                    </li>
+                </ul>
+                <h4>Client Errors (4xx):</h4>
+                <ul class="custom-list">
+                    <li>
+                        <strong><code>400 Bad Request</code>:</strong> The
+                        request has invalid syntax or missing parameters.
+                    </li>
+                    <li>
+                        <strong><code>401 Unauthorized</code>:</strong>
+                        Authentication is required, and the client failed to
+                        provide valid credentials.
+                    </li>
+                    <li>
+                        <strong><code>403 Forbidden</code>:</strong> The server
+                        understands the request but refuses to fulfill it due to
+                        lack of permission.
+                    </li>
+                    <li>
+                        <strong><code>404 Not Found</code>:</strong> The
+                        requested resource does not exist on the server.
+                    </li>
+                    <li>
+                        <strong><code>405 Method Not Allowed</code>:</strong>
+                        The HTTP method used is not supported for the resource.
+                    </li>
+                </ul>
+                <h4>Server Errors (5xx):</h4>
+                <ul class="custom-list">
+                    <li>
+                        <strong><code>500 Internal Server Error</code>:</strong>
+                        Something unexpected went wrong on the server, and it
+                        cannot specify the exact problem.
+                    </li>
+                    <li>
+                        <strong><code>502 Bad Gateway</code>:</strong> A server
+                        acting as a gateway or proxy received an invalid
+                        response from an upstream server.
+                    </li>
+                    <li>
+                        <strong><code>503 Service Unavailable</code>:</strong>
+                        The server is temporarily unable to handle the request
+                        due to overloading or maintenance.
+                    </li>
+                    <li>
+                        <strong><code>504 Gateway Timeout</code>:</strong> The
+                        proxy server did not receive a timely response from the
+                        upstream server.
+                    </li>
+                </ul>
+                <h4>Other Common Status Codes:</h4>
+                <ul class="custom-list">
+                    <li>
+                        <strong><code>429 Too Many Requests</code>:</strong> The
+                        user has sent too many requests within a specific time
+                        frame, exceeding rate limits.
+                    </li>
+                    <li>
+                        <strong><code>301 Moved Permanently</code>:</strong> The
+                        requested resource has been permanently moved to a
+                        different URL.
+                    </li>
+                    <li>
+                        <strong
+                            ><code>302 Found (Temporary Redirect)</code
+                            >:</strong
+                        >
+                        The requested resource can be found under a different
+                        URL temporarily.
+                    </li>
+                    <li>
+                        <strong><code>304 Not Modified</code>:</strong> The
+                        resource has not been modified since the last request,
+                        allowing the client to use its cached copy.
+                    </li>
+                </ul>
+                <p>
+                    These status codes are fundamental for interpreting and
+                    responding to HTTP requests effectively in web development.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
