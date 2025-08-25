@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Server Setup w/ Mongoose & Express</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Server Setup w/ Mongoose & Express</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/2zAiIPNjusI"
+                    title="Server Setup w/ Mongoose & Express Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining server setup with Mongoose and Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>The Restaurant Analogy</h3>
+                <h4>Express</h4>
+                <ul class="custom-list">
+                    <li>
+                        <code>Express.js</code> plays the role of the waiters.
+                    </li>
+                    <ul class="custom-list">
+                        <li>
+                            Takes orders from the customers (<code>React</code>
+                            app)
+                        </li>
+                        <li>
+                            Communicates them to the kitchen
+                            (<code>MongoDB</code>) and chefs
+                            (<code>Mongoose</code>).
+                        </li>
+                        <li>
+                            Provides a bridge between the customers and the
+                            kitchen, ensuring that orders are accurately
+                            conveyed and dishes are served promptly.
+                        </li>
+                    </ul>
+                </ul>
+                <h4>Mongoose</h4>
+                <ul class="custom-list">
+                    <li>
+                        <code>Mongoose</code> acts as the chef in the kitchen
+                    </li>
+                    <ul class="custom-list">
+                        <li>
+                            Responsible for handling all the ingredients (data)
+                            stored in <code>MongoDB</code>.
+                        </li>
+                        <li>
+                            Chefs follow recipes (schemas) to create and modify
+                            dishes (documents) based on the orders received from
+                            the waiters (<code>Express.js</code>).
+                        </li>
+                        <li>
+                            Ensures that the dishes meet quality standards and
+                            are prepared correctly before serving them to the
+                            customers.
+                        </li>
+                    </ul>
+                </ul>
+                <h4>MongoDB</h4>
+                <ul class="custom-list">
+                    <li><code>MongoDB</code> serves as the kitchen</li>
+                    <ul class="custom-list">
+                        <li>
+                            All the ingredients (data) are stored and managed.
+                        </li>
+                        <li>
+                            Just like a kitchen organizes ingredients into
+                            various dishes, <code>MongoDB</code> organizes data
+                            into collections and documents.
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

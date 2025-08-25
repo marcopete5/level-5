@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Models, Schemas & Routes</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Models, Schemas & Routes</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/BxA5y1FgG3w"
+                    title="Models, Schemas & Routes Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining models, schemas, and routes with Mongoose in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Dependency npm command:</h3>
+                <p><code>npm install express morgan mongoose@6.12</code></p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>JSON object for Postman testing:</h3>
+                <pre><code class="language-json">
+{
+    "product": "",
+    "category": "",
+    "price": 0,
+    "quantity": 0
+}
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Beginning server.js code:</h3>
+                <pre><code class="language-jsx">
+const app = express()
+const morgan = require('morgan')
+
+app.use(express.json())
+app.use(morgan('dev'))
+
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb+srv://jordanburger:helloworld@cluster0.zrmjrwz.mongodb.net/',
+    (err) => console.log('Connected to DB', err)
+)
+
+app.use((err, req, res, next) => {
+    console.log(err)
+    return res.send({ errMsg: err.message })
+})
+
+app.listen(8000, () => console.log('Server running on port 8000'))
+            </code></pre>
+            </div>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    width="1698"
+                    height="713"
+                    src="https://www.youtube.com/embed/d-bM2OlA9to"
+                    title="MongoDB Routes w. Mongoose 8"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
