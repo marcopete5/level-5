@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Relating Data in MongoDB</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Relating Data in MongoDB</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/CkS6hk3hdC0"
+                    title="Relating Data in MongoDB Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining one-to-many relationships in MongoDB with Mongoose"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student will be able to explain the one-to-many
+                        relationship.
+                    </li>
+                    <li>
+                        A student will be able to incorporate the one-to-many
+                        relationship between two models.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Director Code</h3>
+                <h4>Director Model</h4>
+                <p>
+                    Create a <code>director.js</code> and add the following code
+                </p>
+                <pre><code class="language-jsx">
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
+
+const directorSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,
+        required: true
+    }
+})
+
+module.exports = mongoose.model("Director", directorSchema)
+            </code></pre>
+                <h4>Director Router</h4>
+                <p>
+                    Create a <code>directorRouter.js</code> and add the
+                    following code
+                </p>
+                <pre><code class="language-jsx">
+const express = require("express")
+const directorRouter = express.Router()
+const Director = require("../models/directors")
+
+directorRouter.get("/", async (req, res, next) => {
+    try {
+        const foundDirectors = await Director.find()
+        return res.status(200).send(foundDirectors)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
+directorRouter.post("/", async (req, res, next) => {
+    try {
+        const newDirector = new Director(req.body)
+        const savedDirector = await newDirector.save()
+        return res.status(201).send(savedDirector)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
+module.exports = directorRouter
+            </code></pre>
+                <h4>Director Middleware</h4>
+                <p>
+                    Create a directors endpoint middleware and add the following
+                    code
+                </p>
+                <pre><code class="language-jsx">
+app.use("/directors", require("./routes/directorRouter"))
+            </code></pre>
+                <h4>Updated Movie Model/Schema</h4>
+                <p>
+                    Create an author property and set to
+                    <code>Schema.Types.ObjectId</code> to reference a unique
+                    director
+                </p>
+                <pre><code class="language-jsx">
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
+
+const movieSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    genre: {
+        type: String
+    },
+    // Updated Author Property to hold the unique id for who created each movie.
+    author: {
+        type: Schema.Types.ObjectId, // mongoose schema syntax for database id
+        ref : "Director" // mongoose reference to the Director Schema/Model
+    }
+})
+
+module.exports = mongoose.model("Movie", movieSchema)
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        Students will be able to describe the difference between
+                        a one-to-many and many-to-one relationship in
+                        <code>mongodb</code>.
+                    </li>
+                    <li>
+                        Students will be able to write a post request adding a
+                        movie to the database by a unique director.
+                        (One-to-Many)
+                    </li>
+                    <li>
+                        Students will be able to write a get request fetching
+                        the movies from the database by a unique director.
+                        (Many-to-One)
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>What is a One-to-Many Relationship?</h3>
+                <p>
+                    In a one-to-many relationship, a single document (parent)
+                    can be linked to multiple related documents (children).
+                    Imagine a blog post (parent) with many comments (children).
+                    Each blog post can have numerous comments, but each comment
+                    belongs to only one specific post.
+                </p>
+                <p>
+                    In <code>MongoDB</code>, we model this relationship by
+                    storing a reference (often an ID) from the child document to
+                    the parent document within the child's schema. This
+                    establishes the connection without needing complex joins
+                    like in relational databases.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>What is a Many-to-One Relationship?</h3>
+                <p>
+                    A many-to-one relationship is essentially the opposite of
+                    one-to-many. Here, multiple documents (children) can be
+                    linked to a single parent document. Going back to our
+                    example, many user profiles (children) can follow a single
+                    blog post (parent). Each user can follow many posts, but a
+                    post is typically followed by many users.
+                </p>
+                <p>
+                    Similar to one-to-many relationships, we achieve this by
+                    storing a reference from the child document (user profile)
+                    to the parent document (blog post) within the child's
+                    schema.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Imagine a Library</h3>
+                <p>
+                    Think of a library as an analogy for our data. Books are
+                    like movies, and authors are like directors. A single author
+                    (director) can write many books (movies), but a book (movie)
+                    typically has only one author (director). This represents a
+                    <strong>one-to-many</strong> relationship.
+                </p>
+                <p>
+                    In <code>Mongoose</code>, we can model these relationships
+                    within our schema definitions.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Code Breakdown: One-to-Many Example</h3>
+                <h4>JavaScript</h4>
+                <pre><code class="language-jsx">
+movieRouter.post("/movieWithDirector/:directorId", async (req, res, next) => {
+  // ... (error handling)
+
+  // 1. Extract director ID from request parameter
+  req.body.author = req.params.directorId;
+
+  // 2. Create new movie with linked director ID
+  const newMovie = new Movie(req.body);
+
+  // 3. Save the new movie with director reference
+  const savedMovie = await newMovie.save();
+
+  // 4. Send successful response with saved movie
+  return res.status(201).send(savedMovie);
+});
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Line-by-Line Explanation:</h3>
+                <p>
+                    <strong
+                        ><code
+                            >req.body.author = req.params.directorId;</code
+                        ></strong
+                    >: This line extracts the <code>directorId</code> from the
+                    request parameter and assigns it to a new property named
+                    <code>author</code> within the request body
+                    (<code>req.body</code>). This creates a reference between
+                    the movie and the director.
+                </p>
+                <p>
+                    <strong
+                        ><code
+                            >const newMovie = new Movie(req.body);</code
+                        ></strong
+                    >: A new movie document is created using the
+                    <code>Mongoose</code> <code>Movie</code> model, and the
+                    request body (now containing the
+                    <code>author</code> property) is used to populate its
+                    fields.
+                </p>
+                <p>
+                    <strong
+                        ><code
+                            >const savedMovie = await newMovie.save();</code
+                        ></strong
+                    >: The movie document is saved to the database using the
+                    <code>save</code> method. Since
+                    <code>author</code> references the director's ID, this
+                    establishes the one-to-many relationship.
+                </p>
+                <p>
+                    <strong
+                        ><code
+                            >return res.status(201).send(savedMovie);</code
+                        ></strong
+                    >: Upon successful save, the response sends back the newly
+                    created movie document with its details.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Fetching Movies by Director (Many-to-One)</h3>
+                <h4>JavaScript</h4>
+                <pre><code class="language-jsx">
+movieRouter.get("/moviesByDirector/:directorId", async (req, res, next) => {
+  // ... (error handling)
+
+  // 1. Extract director ID from request parameter
+  const directorId = req.params.directorId;
+
+  // 2. Find movies with matching director ID
+  const foundMovies = await Movie.find({ author: directorId });
+
+  // 3. Send successful response with movies list
+  return res.status(200).send(foundMovies);
+});
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Line-by-Line Explanation:</h3>
+                <p>
+                    <strong
+                        ><code
+                            >const directorId = req.params.directorId;</code
+                        ></strong
+                    >: Similar to the previous example, this line extracts the
+                    <code>directorId</code> from the request parameter.
+                </p>
+                <p>
+                    <strong
+                        ><code
+                            >const foundMovies = await Movie.find({ author:
+                            directorId });</code
+                        ></strong
+                    >: The <code>Movie</code> model's <code>find</code> method
+                    is used to search for movies where the
+                    <code>author</code> field (referencing the director) matches
+                    the extracted <code>directorId</code>. This retrieves all
+                    movies associated with that particular director.
+                </p>
+                <p>
+                    <strong
+                        ><code
+                            >return res.status(200).send(foundMovies);</code
+                        ></strong
+                    >: If movies are found, the response sends back a list of
+                    those movies associated with the director.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
