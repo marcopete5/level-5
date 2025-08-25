@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Schemas & Models</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Schemas & Models</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/agv7DP_T5nQ"
+                    title="Schemas & Models Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create Mongoose schemas and models"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to create a
+                    <code>Mongoose</code> Schema.
+                </p>
+                <p>
+                    A student will be able to export their Schema as a
+                    <code>Mongoose</code> Model.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Understanding Schemas in Mongoose</h3>
+                <p>
+                    Ever wondered how data is organized in a NoSQL database like
+                    <code>MongoDB</code>? Schemas in <code>Mongoose</code> act
+                    like blueprints, helping you define the structure of your
+                    data before storing it in the database. This ensures
+                    consistency and makes it easier to manage your information.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Think of Schemas as Blueprints</h3>
+                <p>
+                    Imagine a schema like a blueprint for building a house. The
+                    blueprint specifies the rooms, their sizes, and where doors
+                    and windows go. Similarly, a <code>Mongoose</code> schema
+                    defines the properties (like name, email) and their data
+                    types (like <code>String</code>, <code>Boolean</code>) for
+                    each document (like a user) you'll store in your
+                    <code>MongoDB</code> collection.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Why Use Schemas?</h3>
+                <p>There are several benefits to using schemas:</p>
+                <ul class="custom-list">
+                    <li>
+                        <strong>Validation:</strong> Schemas can enforce rules
+                        on your data. For example, you can make sure a user's
+                        name is always a <code>String</code> and cannot be
+                        empty.
+                    </li>
+                    <li>
+                        <strong>Structure:</strong> Schemas keep your data
+                        organized and consistent, making it easier to understand
+                        and work with later.
+                    </li>
+                    <li>
+                        <strong>Error Prevention:</strong> By catching errors
+                        during data entry (like missing required fields),
+                        schemas help prevent issues down the line.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Building a Simple Schema</h3>
+                <p>Let's create a basic schema for storing user information:</p>
+                <pre><code class="language-jsx">
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+  name: String, // String data type for the user's name
+  username: {
+    type: String, // String data type
+    required: true, // Username is mandatory
+    unique: true, // Each username must be unique
+  },
+  email: String, // String data type for the user's email
+  admin: Boolean, // Boolean data type to indicate admin status
+});
+
+// Export the schema as a model for future use
+module.exports = mongoose.model("User", userSchema);
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Understanding Schema Properties:</h3>
+                <p>Understanding Schema Properties:</p>
+                <ul class="custom-list">
+                    <li>
+                        <strong>Data Types:</strong> We specify the data type
+                        for each property, like <code>String</code>,
+                        <code>Boolean</code>, or <code>Number</code>.
+                    </li>
+                    <li>
+                        <strong>Required Fields:</strong> Using
+                        <code>required: true</code>, we can ensure certain
+                        fields are always filled in.
+                    </li>
+                    <li>
+                        <strong>Unique Values:</strong> Setting
+                        <code>unique: true</code> guarantees no duplicate values
+                        for a specific property (like usernames).
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Organizing Your Schemas</h3>
+                <p>
+                    For better project structure, it's recommended to keep each
+                    schema in a separate file, like <code>user.js</code>,
+                    <code>post.js</code>, and so on. This makes your code more
+                    organized and easier to manage.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Conclusion</h3>
+                <p>
+                    <code>Mongoose</code> schemas are a powerful tool for
+                    building well-structured and validated data models in your
+                    <code>MongoDB</code> database. By understanding the basics
+                    of schemas and their properties, you'll be well on your way
+                    to organizing your data effectively for your
+                    <code>Mongoose</code> applications.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Params and Queries w/ Mongoose</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Params and Queries w/ Mongoose</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/1iDTWaO4vnk"
+                    title="Params and Queries w/ Mongoose Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to create a query request with Mongoose in Express"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to create a query request on the
+                    backend.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    Searching a Database with Queries and Parameters in Mongoose
+                    with Express
+                </h3>
+                <p>
+                    In this section, we will explore how to search a
+                    <code>MongoDB</code> collection using query parameters with
+                    <code>Mongoose</code> in an
+                    <code>Express</code> application.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Code Snippet</h3>
+                <pre><code class="language-jsx">
+movieRouter.get('/genre', async (req, res, next) => {
+    try {
+        const genre = req.query.genre
+        const foundMovies = await Movie.find({ genre })
+        return res.status(200).send(foundMovies)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Explanation</h3>
+                <h4>1. Route Definition and Query Parameters</h4>
+                <p>
+                    <code>Route Definition</code>:
+                    <code
+                        >movieRouter.get('/genre', async (req, res, next) => {
+                        ... })</code
+                    >
+                    sets up a GET route for searching movies by genre. The
+                    endpoint <code>/genre</code> is used for this purpose.
+                </p>
+                <p>
+                    <code>Async Function</code>: The callback function is marked
+                    as <code>async</code>, allowing the use of
+                    <code>await</code> to handle asynchronous operations.
+                </p>
+                <h4>2. Extracting Query Parameters</h4>
+                <p>
+                    <code>req.query.genre</code>: The genre parameter is
+                    extracted from the query string of the request URL using
+                    <code>req.query.genre</code>. This parameter is used to
+                    filter the movies based on their genre.
+                </p>
+                <h4>3. Performing the Search with <code>await</code></h4>
+                <p>
+                    <code>Movie.find({ genre })</code>: This
+                    <code>Mongoose</code> query searches for all movie documents
+                    where the genre matches the provided genre parameter.
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <code>Filter Object ({ genre })</code>: The filter
+                        object specifies the criteria for the search. Here, it
+                        filters movies based on the genre.
+                    </li>
+                    <li>
+                        <code>await Keyword</code>: The
+                        <code>await</code> keyword pauses the function's
+                        execution until the promise returned by
+                        <code>Movie.find</code> is resolved. The result, which
+                        is an array of movies matching the genre, is stored in
+                        <code>foundMovies</code>.
+                    </li>
+                </ul>
+                <h4>4. Error Handling with <code>try/catch</code></h4>
+                <p>
+                    <code>Try Block</code>: The code that might throw an error,
+                    such as the <code>Mongoose</code> query, is enclosed in the
+                    <code>try</code> block.
+                </p>
+                <p>
+                    <code>Catch Block</code>: If an error occurs, the
+                    <code>catch</code> block is executed. The error object
+                    (<code>error</code>) provides details about the failure.
+                </p>
+                <p>
+                    <code>Error Response</code>: In case of an error, the server
+                    responds with a 500 status code
+                    (<code>res.status(500)</code>) and passes the error to the
+                    next middleware using <code>next(error)</code> for further
+                    handling.
+                </p>
+                <h4>5. Sending the Response</h4>
+                <p>
+                    <code>Successful Search</code>: If the search operation is
+                    successful, the server responds with a 200 status code
+                    (<code>res.status(200)</code>) and sends the array of found
+                    movies (<code>foundMovies</code>) back to the client.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Summary</h3>
+                <p>
+                    This code demonstrates how to search a
+                    <code>MongoDB</code> collection using query parameters with
+                    <code>Mongoose</code> in an
+                    <code>Express</code> application:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <code>Route Parameters</code>: Extracting query
+                        parameters from the request URL.
+                    </li>
+                    <li>
+                        <code>Mongoose Query</code>: Using
+                        <code>Movie.find</code> to search for documents that
+                        match the query criteria.
+                    </li>
+                    <li>
+                        <code>Async/Await</code>: Managing asynchronous database
+                        operations with <code>async</code> and
+                        <code>await</code>.
+                    </li>
+                    <li>
+                        <code>Try/Catch</code>: Handling potential errors
+                        gracefully to ensure robust error management.
+                    </li>
+                </ul>
+                <p>
+                    By understanding this example, you can effectively perform
+                    search operations on <code>MongoDB</code> documents using
+                    <code>Mongoose</code>, ensuring your
+                    <code>Express</code> applications can handle dynamic queries
+                    and provide accurate results to the client.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

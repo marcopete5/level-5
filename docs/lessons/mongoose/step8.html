@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Put Request w/ Mongoose</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+</head>
+<body>
+    <div class="slide-container" role="region" aria-labelledby="lesson-header">
+        <header class="slide-header">
+            <h1 id="lesson-header">Put Request w/ Mongoose</h1>
+            <h2>Lesson</h2>
+        </header>
+
+        <div class="section">
+            <iframe class="video-embed" src="https://www.youtube.com/embed/329AQoS7ETc" title="Put Request w/ Mongoose Lesson" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen aria-label="Video explaining how to write an Express PUT request with Mongoose"></iframe>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Learning Objectives</h3>
+            <p>A student will be able to write an express put request to update an object in their database.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Updating a Document in Mongoose with Express</h3>
+            <p>In this section, we will explore how to update a document in a <code>MongoDB</code> collection using <code>Mongoose</code> within an <code>Express</code> application. We'll also briefly compare the <code>findOneAndUpdate</code> and <code>findByIdAndUpdate</code> methods.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Code Snippet</h3>
+            <pre><code class="language-jsx">
+movieRouter.put('/:movieId', async (req, res, next) => {
+    try {
+        const movieId = req.params.movieId
+        const updatedMovie = await Movie.findByIdAndUpdate(
+            movieId,
+            req.body,
+            { new: true } // Telling the database we want the newest version returned
+        )
+        return res.status(201).send(updatedMovie)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+            </code></pre>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Explanation</h3>
+            <h4>1. Route Definition and Parameters</h4>
+            <p><code>Route Definition</code>: <code>movieRouter.put('/:movieId', async (req, res, next) => { ... })</code> sets up a PUT route to update a specific movie document. The <code>:movieId</code> part of the URL is a route parameter representing the ID of the movie to be updated.</p>
+            <p><code>Async Function</code>: The callback function is marked as <code>async</code>, allowing the use of <code>await</code> for handling asynchronous operations.</p>
+            <h4>2. Extracting Route Parameters</h4>
+            <p><code>movieId</code>: The ID of the movie to be updated is extracted from the route parameters using <code>req.params.movieId</code>. This ID is used to identify which movie document to update in the database.</p>
+            <h4>3. Performing the Update with <code>await</code></h4>
+            <p><code>findByIdAndUpdate</code> Method: The <code>findByIdAndUpdate</code> method is used to find a movie by its ID and update it with the new data provided in <code>req.body</code>.</p>
+            <ul class="custom-list">
+                <li><code>First Argument (movieId)</code>: The ID of the movie to be updated.</li>
+                <li><code>Second Argument (req.body)</code>: The new data to update the movie with.</li>
+                <li><code>Third Argument ({ new: true })</code>: An options object specifying that the method should return the updated document (<code>new: true</code>).</li>
+            </ul>
+            <h4>4. Error Handling with <code>try/catch</code></h4>
+            <p><code>Try Block</code>: The code that might throw an error, such as the <code>Mongoose</code> update operation, is enclosed in the <code>try</code> block.</p>
+            <p><code>Catch Block</code>: If an error occurs, the <code>catch</code> block is executed. The error object (<code>error</code>) provides details about the failure.</p>
+            <p><code>Error Response</code>: In case of an error, the server responds with a 500 status code (<code>res.status(500)</code>) and passes the error to the next middleware using <code>next(error)</code> for further handling.</p>
+            <h4>5. Sending the Response</h4>
+            <p><code>Successful Update</code>: If the update operation is successful, the server responds with a 201 status code (<code>res.status(201)</code>) and sends the updated movie document (<code>updatedMovie</code>) back to the client.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3><code>findOneAndUpdate</code> vs. <code>findByIdAndUpdate</code></h3>
+            <ul class="custom-list">
+                <li><strong><code>findOneAndUpdate</code></strong>:
+                    <p>Updates the first document that matches the specified filter.</p>
+                    <p>Requires a filter object to identify the document to be updated.</p>
+                    <p>Example: <pre><code class="language-jsx">Movie.findOneAndUpdate({ title: 'Inception' }, req.body, { new: true })</code></pre></p>
+                    <p>Useful when you need to update a document based on a field other than its <code>_id</code>.</p>
+                </li>
+                <li><strong><code>findByIdAndUpdate</code></strong>:
+                    <p>Specifically finds a document by its <code>_id</code> and updates it.</p>
+                    <p>Directly takes the document ID as the first argument, simplifying the query.</p>
+                    <p>Example: <pre><code class="language-jsx">Movie.findByIdAndUpdate(movieId, req.body, { new: true })</code></pre></p>
+                    <p>Preferred when you have the document's <code>_id</code> and want to ensure you're updating the correct document.</p>
+                </li>
+            </ul>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Summary</h3>
+            <p>This code demonstrates how to update a document in a <code>MongoDB</code> collection using <code>Mongoose</code> in an <code>Express</code> application:</p>
+            <ul class="custom-list">
+                <li><code>Route Parameters</code>: Extracting the movie ID from the request URL.</li>
+                <li><code>Mongoose Query</code>: Using <code>findByIdAndUpdate</code> to update the movie document and return the updated version.</li>
+                <li><code>Async/Await</code>: Managing asynchronous database operations with <code>async</code> and <code>await</code>.</li>
+                <li><code>Try/Catch</code>: Handling potential errors gracefully to ensure robust error management.</li>
+            </ul>
+            <p>By understanding this example, you can effectively perform update operations on <code>MongoDB</code> documents using <code>Mongoose</code>, ensuring your <code>Express</code> applications are both powerful and reliable.</p>
+        </div>
+
+        <footer class="slide-footer">
+        </footer>
+    </div>
+</body>
+</html>

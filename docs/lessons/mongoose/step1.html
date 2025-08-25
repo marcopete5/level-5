@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MongoDB Setup</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">MongoDB Setup</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <p>
+                    Follow the instruction below to setup your MongoDB
+                    connection
+                </p>
+                <p><strong>*We suggest using MongoDB Atlas</strong></p>
+                <p>Follow the instructions below to set up MongoDB Atlas</p>
+                <h3>Set up MongoDB Atlas</h3>
+                <p>
+                    Atlas is MongoDB's cloud database service. It lets you host
+                    your databases for free up to a certain amount, and what's
+                    great about it is you don't need to input any credit card
+                    details at all to get started.
+                </p>
+                <h4>Creating a MongoDB Atlas Account</h4>
+                <p>
+                    Head over to
+                    <a
+                        href="https://www.mongodb.com/try"
+                        target="_blank"
+                        rel="noopener"
+                        >https://www.mongodb.com/try</a
+                    >
+                    to create your account. You'll then be taken to a page where
+                    you can enter your project details and your preferred
+                    language (JavaScript).
+                </p>
+                <p>
+                    Next you'll be prompted to choose your cluster (a cluster is
+                    MongoDB's term to mean several servers working together to
+                    carry your data). Select the free, Shared cluster option.
+                    After, you can choose your settings for your starter
+                    cluster. Atlas provides 3 cloud platforms, all of which have
+                    free tiers. Choose AWS and select the recommended region, N.
+                    Virginia (us-east-1).
+                </p>
+                <p>
+                    Under Cluster Tier, select the free, M0 Sandbox tier. Then
+                    choose a name for your cluster or leave it as is, then
+                    create your cluster.
+                </p>
+                <h4>Creating a User</h4>
+                <p>
+                    It will take a few minutes to create your cluster, so in the
+                    meantime let's create a user. On the left-hand side
+                    navigation menu, click on Database Access then Add New
+                    Database User. Create a username and password, and remember
+                    to note the password somewhere, as you'll be needing it
+                    later to connect your database in your app.
+                </p>
+                <p>
+                    Below that set your Database User Privileges to Atlas Admin,
+                    and finish creating your user.
+                </p>
+                <h4>Access</h4>
+                <p>
+                    Next, you'll need to whitelist your IP address so that you
+                    can access your cluster. Go to Network Access on the
+                    navigation menu, and Add IP Address. You can either Add Your
+                    Current IP Address or Allow Access from Anywhere. Confirm
+                    your choice.
+                </p>
+                <p>
+                    For any projects deployed through Heroku, you'll have to
+                    select Allow Access from Anywhere. This is because Heroku
+                    uses Dynamic IPs. While this isn't the most secure option,
+                    it is fine for now.
+                </p>
+                <h4>Connecting Your Cluster to Your App</h4>
+                <p>
+                    Go to Clusters to view your newly-created cluster. Click on
+                    Connect, then MongoDB for VS Code (in the list under Access
+                    your data through tools). Copy the connection string and
+                    replace <code>&lt;username&gt;</code> and
+                    <code>&lt;password&gt;</code> with the user details you
+                    created earlier. It will look something like this:
+                </p>
+                <pre><code class="language-text">
+mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.kbgkapq.mongodb.net/
+            </code></pre>
+                <p>Use the string in the <code>mongoose.connect()</code></p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

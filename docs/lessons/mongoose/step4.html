@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Get Request w/ Mongoose</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Get Request w/ Mongoose</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/Ru5aOI0tdnc"
+                    title="Get Request w/ Mongoose Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining how to write an Express GET request with Mongoose"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <p>
+                    A student will be able to write a express get request, using
+                    <code>mongoose</code> to ask the database
+                    (<code>MongoDB</code>) for data.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    Understanding Mongoose Queries with Async/Await and Error
+                    Handling in Express
+                </h3>
+                <p>
+                    In this section, we will break down a sample code snippet
+                    that demonstrates how to use <code>Mongoose</code> to
+                    interact with a <code>MongoDB</code> database in an
+                    <code>Express</code> application. We'll cover
+                    <code>Mongoose</code> queries, the
+                    <code>async/await</code> syntax, and error handling with
+                    <code>try/catch</code>.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Code Snippet</h3>
+                <pre><code class="language-jsx">
+const Movie = require('../models/movie')
+
+movieRouter.get('/', async (req, res, next) => {
+    try {
+        const foundMovies = await Movie.find()
+        return res.status(200).send(foundMovies)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Explanation</h3>
+                <h4>
+                    1. Introduction to Mongoose and the <code>Movie</code> Model
+                </h4>
+                <p>
+                    <code>Mongoose</code>: <code>Mongoose</code> is a powerful
+                    ODM (Object Data Modeling) library for
+                    <code>MongoDB</code> and <code>Node.js</code>. It allows you
+                    to define schemas and interact with
+                    <code>MongoDB</code> using models.
+                </p>
+                <p>
+                    <code>Movie</code> Model: The <code>Movie</code> model is
+                    imported at the top of the file with
+                    <code>const Movie = require('../models/movie')</code>. This
+                    model represents a collection of movie documents in the
+                    database, with its structure defined in a separate file
+                    (<code>../models/movie</code>).
+                </p>
+                <h4>2. Defining the Route Handler</h4>
+                <p>
+                    <code>Route Definition</code>:
+                    <code
+                        >movieRouter.get('/', async (req, res, next) => { ...
+                        })</code
+                    >
+                    sets up a GET route at the root path <code>/</code> of the
+                    <code>movieRouter</code>. When this endpoint is hit with a
+                    GET request, the provided callback function executes.
+                </p>
+                <p>
+                    <code>Async Function</code>: By marking the callback
+                    function as <code>async</code>, we can use
+                    <code>await</code> within it to handle asynchronous
+                    operations more seamlessly.
+                </p>
+                <h4>3. Performing a Mongoose Query with <code>await</code></h4>
+                <p>
+                    <code>Movie.find()</code>: This is a
+                    <code>Mongoose</code> query that retrieves all documents
+                    from the <code>movies</code> collection. It returns a
+                    promise.
+                </p>
+                <p>
+                    <code>await</code> Keyword: The <code>await</code> keyword
+                    pauses the function's execution until the promise is
+                    resolved. Here, it waits for the
+                    <code>Movie.find()</code> query to complete and assigns the
+                    result to <code>foundMovies</code>.
+                </p>
+                <p>
+                    <code>Storing Results</code>: The fetched movie documents
+                    are stored in the <code>foundMovies</code> variable.
+                </p>
+                <h4>4. Handling Errors with <code>try/catch</code></h4>
+                <p>
+                    <code>Try Block</code>: Code that might throw an error is
+                    placed inside the <code>try</code> block. In this case, the
+                    <code>Mongoose</code> query (<code>await Movie.find()</code
+                    >) is enclosed in the <code>try</code> block.
+                </p>
+                <p>
+                    <code>Catch Block</code>: If an error occurs during the
+                    query, the <code>catch</code> block is executed. The error
+                    object (<code>error</code>) provides details about what went
+                    wrong.
+                </p>
+                <p>
+                    <code>Error Response</code>: If an error is caught, the
+                    server responds with a 500 status code
+                    (<code>res.status(500)</code>), indicating an internal
+                    server error. The <code>next</code> function is called with
+                    the error to pass it to the next middleware for further
+                    handling, such as logging or sending a more detailed error
+                    response to the client.
+                </p>
+                <h4>5. Sending the Response</h4>
+                <p>
+                    <code>Successful Query</code>: If the query is successful,
+                    the server sends a 200 status code
+                    (<code>res.status(200)</code>) along with the array of found
+                    movies (<code>foundMovies</code>).
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Summary</h3>
+                <p>
+                    This code demonstrates a typical pattern for querying a
+                    <code>MongoDB</code> database using <code>Mongoose</code> in
+                    an <code>Express</code> application:
+                </p>
+                <ul class="custom-list">
+                    <li>
+                        <code>Mongoose Query</code>:
+                        <code>Movie.find()</code> retrieves all movie documents.
+                    </li>
+                    <li>
+                        <code>Async/Await</code>: <code>async</code> and
+                        <code>await</code> are used for handling asynchronous
+                        database operations in a clear and readable manner.
+                    </li>
+                    <li>
+                        <code>Try/Catch</code>: This pattern is used to manage
+                        potential errors, ensuring the application can handle
+                        failures gracefully.
+                    </li>
+                </ul>
+                <p>
+                    By understanding this example, you can see how to
+                    effectively integrate <code>Mongoose</code> with
+                    <code>Express</code> to perform database operations while
+                    maintaining clean and robust code.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

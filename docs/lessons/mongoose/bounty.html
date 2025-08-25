@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bounty Hunter Final Part</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="assignment-header">
+            <header class="slide-header">
+                <h1 id="assignment-header">Bounty Hunter Final Part</h1>
+                <h2>Assignment</h2>
+            </header>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Overview</h3>
+                <p>
+                    Boba Fett has asked you to build him an API so he can keep
+                    track of his bounties. You have done a satisfactory job up
+                    to this point except that every time the server reloads, all
+                    the data is wiped. Boba Fett is absolutely not happy about
+                    this because it means he has to go back to Jabba the Hutt to
+                    get a list of bounties. To help him out (and more
+                    importantly, to make sure you don't get on the list) you
+                    have decided to use <code>MongoDB</code> to persistently
+                    store the bounty hunter data. And you have decided to use
+                    <code>Mongoose</code> to do so.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Objectives</h3>
+                <p>
+                    Since you already have the routes set up and working (from
+                    the previous
+                    <a
+                        href="https://coursework.vschool.io/the-original-bounty-hunter/"
+                        target="_blank"
+                        rel="noopener"
+                        >bounty hunter exercise</a
+                    >), the first step is to create a data model. You can refer
+                    to
+                    <a
+                        href="https://coursework.vschool.io/mongoose-basics/"
+                        target="_blank"
+                        rel="noopener"
+                        >this document</a
+                    >
+                    if you need a refresher on how to use <code>mongoose</code>.
+                </p>
+                <p>
+                    Once the data model is created (preferably in a file
+                    separate from your routes) it's time to add
+                    <code>mongoose</code> queries to your routes. For example,
+                    when handling GET requests, use the find query to get a list
+                    of all the bounties:
+                </p>
+                <pre><code class="language-jsx">
+app.get('/bounty', function (req, res) {
+  // assuming your model is called bounty
+  Bounty.find({}, function (err, data) {
+    // the data parameter contains a list of bounties
+    res.send(data);
+  });
+});
+            </code></pre>
+                <p>
+                    It's pretty simple. Ask for help if you need it. Enjoy, and
+                    don't get on Boba Fett's dark side :)
+                </p>
+                <ul class="custom-list">
+                    <li>Create a Model</li>
+                    <li>
+                        Add <code>Mongoose</code> Queries to each request type
+                        in order to get the necessary information. (See Code
+                        example below)
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>DEMO OF COMPLETED ASSIGNMENT</h3>
+                <div class="section">
+                    <iframe
+                        class="video-embed"
+                        width="1280"
+                        height="720"
+                        style="border: 0"
+                        scrolling="no"
+                        src="https://go.screenpal.com/player/cTjT36n2mjU?controls=1&share=1&download=1&embed=1&cl=1&width=1280&height=720&overlays=1&ff=1"
+                        allowfullscreen="true"></iframe>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Task Rubric</h3>
+                <table
+                    style="
+                        border-collapse: collapse;
+                        width: 100%;
+                        border: 1px solid #e5e7eb;
+                        background-color: #ffffff;
+                    "
+                    role="grid"
+                    aria-label="Task Rubric">
+                    <thead>
+                        <tr style="background-color: #1a2a44; color: #ffffff">
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Criteria
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 1: Emerging
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 2: Developing
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 3: Proficient
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 4: Mastery
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                MongoDB implementation
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Schema doesn’t match the example. Unable to
+                                connect to database
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Major flaws in using mongoose models to
+                                manipulate database information.
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                All CRUD methods are used correctly. Minor
+                                issues with code organization
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                All CRUD methods work flawlessly. Code
+                                organization is stellar
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>

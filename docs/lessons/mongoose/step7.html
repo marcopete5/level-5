@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Request w/ Mongoose</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+</head>
+<body>
+    <div class="slide-container" role="region" aria-labelledby="lesson-header">
+        <header class="slide-header">
+            <h1 id="lesson-header">Delete Request w/ Mongoose</h1>
+            <h2>Lesson</h2>
+        </header>
+
+        <div class="section">
+            <iframe class="video-embed" src="https://www.youtube.com/embed/XyYCss7UWxY" title="Delete Request w/ Mongoose Lesson" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen aria-label="Video explaining how to write an Express DELETE request with Mongoose"></iframe>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Learning Objectives</h3>
+            <p>A student will be able to write an express route that sends a delete request to the database.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Why are DELETE Requests Important?</h3>
+            <p>DELETE requests are essential for allowing clients to remove resources from your application's data store. This functionality is crucial for various use cases, including:</p>
+            <ul class="custom-list">
+                <li>Deleting user accounts</li>
+                <li>Removing unwanted items from shopping carts or wishlist</li>
+                <li>Deleting outdated blog posts or articles</li>
+                <li>Managing user-generated content (e.g., comments, reviews)</li>
+            </ul>
+            <p>Understanding DELETE requests empowers you to build dynamic web applications that allow users to manage and manipulate data within the system.</p>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Mongoose Delete Request</h3>
+            <pre><code class="language-jsx">
+movieRouter.delete('/:movieId', async (req, res, next) => {
+  try {
+    // 1. Extract movie ID from request parameters
+    const movieId = req.params.movieId;
+
+    // 2. Find and delete movie using Mongoose
+    const deletedMovie = await Movie.findOneAndDelete({ _id: movieId });
+
+    // 3. Handle successful deletion (status 200)
+    return res.status(200).send(`You have successfully deleted ${deletedMovie.title}`);
+  } catch (error) {
+    // 4. Handle errors (status 500)
+    res.status(500);
+    return next(error);
+  }
+});
+            </code></pre>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Line-by-Line Explanation:</h3>
+            <p><pre><code class="language-jsx">movieRouter.delete('/:movieId', async (req, res, next) => { ... }):</code></pre></p>
+            <p>This line defines a route handler for the DELETE HTTP method on the <code>/movies/:movieId</code> path using the Express router.</p>
+            <ul class="custom-list">
+                <li>The asynchronous function takes three arguments:</li>
+                <ul class="custom-list">
+                    <li><code>req</code>: The incoming request object containing data from the client.</li>
+                    <li><code>res</code>: The response object used to send data back to the client.</li>
+                    <li><code>next</code>: A function for passing errors to middleware.</li>
+                </ul>
+            </ul>
+            <p><pre><code class="language-jsx">const movieId = req.params.movieId;</code></pre></p>
+            <p>This line extracts the <code>movieId</code> from the request parameters (<code>req.params</code>). Route parameters are defined using the colon (<code>:</code>) syntax in the route path.</p>
+            <p><pre><code class="language-jsx">const deletedMovie = await Movie.findOneAndDelete({ _id: movieId });</code></pre></p>
+            <p>This line uses <code>Mongoose</code> to find a single movie document with the matching <code>_id</code> (MongoDB document identifier) retrieved from the request parameter.</p>
+            <p>The <code>findOneAndDelete</code> method performs the deletion and returns the deleted document if successful.</p>
+            <p><pre><code class="language-jsx">return res.status(200).send(`You have successfully deleted ${deletedMovie.title}`);</code></pre></p>
+            <p>This block handles the successful deletion scenario:</p>
+            <ul class="custom-list">
+                <li><code>res.status(200)</code> sets the response status code to 200 (OK).</li>
+                <li><code>res.send</code> sends a success message to the client, including the title of the deleted movie using string interpolation.</li>
+            </ul>
+            <p><pre><code class="language-jsx">catch (error) { ... }:</code></pre></p>
+            <p>This block handles any errors that might occur during the deletion process.</p>
+            <ul class="custom-list">
+                <li><code>res.status(500)</code> sets the response status code to 500 (Internal Server Error).</li>
+                <li><code>return next(error)</code> passes the error object to the next middleware in the chain for further handling (e.g., logging).</li>
+            </ul>
+        </div>
+
+        <hr class="section-divider" />
+
+        <div class="section">
+            <h3>Additional Notes:</h3>
+            <p>Additional Notes:</p>
+            <ul class="custom-list">
+                <li>Error handling is crucial for a robust application. Always implement proper error handling mechanisms to provide informative responses to the client in case of issues.</li>
+                <li>You can customize the success and error messages to suit your specific application needs.</li>
+                <li><code>Mongoose</code> offers various methods for interacting with your database, including <code>create</code>, <code>update</code>, and <code>find</code>. Explore the <code>Mongoose</code> documentation for a comprehensive overview: <a href="https://mongoosejs.com/docs/" target="_blank" rel="noopener">https://mongoosejs.com/docs/</a></li>
+            </ul>
+        </div>
+
+        <footer class="slide-footer">
+        </footer>
+    </div>
+</body>
+</html>

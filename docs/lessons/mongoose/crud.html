@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CRUD Store</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="assignment-header">
+            <header class="slide-header">
+                <h1 id="assignment-header">CRUD Store</h1>
+                <h2>Assignment</h2>
+            </header>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Overview</h3>
+                <p>
+                    This exercise is your first foray into implementing
+                    <code>mongoose</code> into your <code>express</code> server.
+                    You will be making a CRUD e-store inventory. Use
+                    <code>postman</code> to interface with all the items in your
+                    database.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Objectives</h3>
+                <h4>Part 1</h4>
+                <ul class="custom-list">
+                    <li>
+                        Build a new server and connect it to
+                        <code>mongodb</code>.
+                    </li>
+                    <li>
+                        In a folder called <code>models</code> create a file
+                        called <code>inventory.js</code> and define a
+                        <code>InventorySchema</code> for items in your store.
+                        Export a <code>InventoryModel</code> at the bottom.
+                    </li>
+                </ul>
+                <h4>Part 2</h4>
+                <ul class="custom-list">
+                    <li>
+                        Create a new folder called
+                        <code>routes</code> containing a file
+                        <code>inventory.js</code>.
+                    </li>
+                    <li>
+                        Create all the necessary routes to make a fully CRUD
+                        application (GET, GET(one), POST, PUT, DELETE, ).
+                    </li>
+                    <li>
+                        Populate your inventory using <code>Postman</code>. Be
+                        sure to test each endpoint.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>DEMO OF COMPLETED ASSIGNMENT</h3>
+                <div class="section">
+                    <iframe
+                        class="video-embed"
+                        width="1280"
+                        height="720"
+                        style="border: 0"
+                        scrolling="no"
+                        src="https://go.screenpal.com/player/cTjTrRn2miq?controls=1&share=1&download=1&embed=1&cl=1&width=1280&height=720&overlays=1&ff=1"
+                        allowfullscreen="true"></iframe>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Task Rubric</h3>
+                <table
+                    style="
+                        border-collapse: collapse;
+                        width: 100%;
+                        border: 1px solid #e5e7eb;
+                        background-color: #ffffff;
+                    "
+                    role="grid"
+                    aria-label="Task Rubric">
+                    <thead>
+                        <tr style="background-color: #1a2a44; color: #ffffff">
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Criteria
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 1: Emerging
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 2: Developing
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 3: Proficient
+                            </th>
+                            <th
+                                style="
+                                    border: 1px solid #e5e7eb;
+                                    padding: 8px;
+                                    text-align: left;
+                                ">
+                                Level 4: Mastery
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                CRUD server handlers
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Express router is not used. Logic to get,
+                                create, edit and delete items is flawed.
+                                <code>req.params</code> and
+                                <code>req.body</code> not used correctly.
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Flaws in logic for getting, creating, deleting
+                                and updating items. Mongoose model is not used
+                                correctly
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Correct logic for getting, creating, deleting
+                                and updating items. Minor issues with code
+                                organization and naming
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Logic to get, create, update and delete works.
+                                Code is well organized and DRY
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                MongoDB implementation
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Schema doesn’t match the example. Unable to
+                                connect to database
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                Major flaws in using mongoose models to
+                                manipulate database information.
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                All CRUD methods are used correctly. Minor
+                                issues with code organization
+                            </td>
+                            <td style="border: 1px solid #e5e7eb; padding: 8px">
+                                All CRUD methods work flawlessly. Code
+                                organization is stellar
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+    </body>
+</html>
