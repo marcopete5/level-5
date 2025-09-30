@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Level 5 | Express and MongoDB - Node.js Module Patterns</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+    </head>
+    <body>
+        <div
+            class="slide-container"
+            role="region"
+            aria-labelledby="lesson-header">
+            <header class="slide-header">
+                <h1 id="lesson-header">Node.js Module Patterns</h1>
+                <h2>Lesson</h2>
+            </header>
+
+            <div class="section">
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/I-Q6BqfwXnY"
+                    title="Node.js Module Patterns Lesson"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    aria-label="Video explaining Node.js module patterns for import and export"></iframe>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Learning Objectives</h3>
+                <ul class="custom-list">
+                    <li>
+                        A student should be able to implement the basics of
+                        import and exporting modules.
+                    </li>
+                </ul>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>Supplementary Content</h3>
+                <img
+                    src="https://coursework.vschool.io/content/images/size/w2000/2017/12/Image-result-for-node-modules-photo-banner.jpeg"
+                    alt="Node.js modules banner image"
+                    style="max-width: 100%; height: auto; border-radius: 8px" />
+                <p>
+                    There are a few different common patterns that are used to
+                    set up the structure of your modules in
+                    <code>Node.js</code>. We'll be discussing 5 such common
+                    patterns.
+                </p>
+                <p>
+                    One of the main things to know/remember, which will help you
+                    immensely as you're trying to understand these different
+                    patterns, is that whatever you set
+                    <code>module.exports</code> equal to in one file is the
+                    thing that will get pulled in when you
+                    <code>require()</code> from another file.
+                </p>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>1. Set <code>module.exports</code> equal to a function</h3>
+                <p>
+                    You can set <code>module.exports</code> equal to a function
+                    (anonymous function expression OR a named function). When
+                    you require that module, what you pull in with
+                    <code>require()</code> is a function which you can then
+                    invoke (call) like normal.
+                </p>
+                <h4>Example 1 - exporting an anonymous function expression:</h4>
+                <pre><code class="language-jsx">
+// greet1.js
+
+module.exports = function() {
+    console.log("Hello world");
+}
+
+// app.js
+
+const greet = require("./greet1");
+greet();
+            </code></pre>
+                <h4>Example 2 - exporting a named function:</h4>
+                <pre><code class="language-jsx">
+// greet1.js
+
+function greeting() {
+    console.log("Hello world");
+}
+
+// notice we don't execute the function, but just pass it as a variable
+module.exports = greeting;  // NOT greeting()
+
+// app.js
+
+const greet = require("./greet1");
+greet();
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    2. Add function expressions as properties on
+                    <code>module.exports</code>
+                </h3>
+                <p>
+                    If you do it this way, you'll need to specify the property
+                    you want when you require the module:
+                </p>
+                <pre><code class="language-jsx">
+// greet2.js
+
+module.exports.greet = function() {
+    console.log("Hello world!");
+}
+
+// app.js
+
+// Either do:
+var greet2 = require("./greet2"); // Returns module.exports, which contains a "greet" property on it
+greet2.greet();
+
+// Or:
+var greet2 = require("./greet2").greet; // Returns just the greet property of module.exports
+greet2();
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    3. Set <code>module.exports</code> to an object of your own
+                    with its own properties
+                </h3>
+                <p>
+                    This is very similar to #2 in that it exports an object with
+                    the properties set to the functions in your module you want
+                    to export.
+                </p>
+                <p>
+                    This pattern is also known as the "Revealing Module Pattern"
+                    because it allows you to expose only the things you want to
+                    expose in your module. You may decide to run a bunch of
+                    logic, have helper functions, etc. all to come to a final
+                    result, and then only expose that final result when the
+                    <code>require()</code> function is run.
+                </p>
+                <pre><code class="language-jsx">
+// greet3.js
+
+var greeting = "Hello world!!!!";
+
+function greet() {
+    console.log(greeting);
+}
+
+// Replace module.exports object with my own object that just contains the one
+// function. Even though I'm only exposing the one greet function, it still has
+// access to all the other functions, login, variables, etc. within this file.
+// This way, I can make it so I'm only exposing that which I want to expose
+// when require() is called.
+module.exports = {
+    greet: greet
+}
+
+// app.js
+
+var greet3 = require("./greet3");
+greet3.greet();
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <h3>
+                    4. Set <code>module.exports</code> equal to a function
+                    constructor
+                </h3>
+                <pre><code class="language-jsx">
+// greet4.js
+function Greetr() {
+    this.greeting = "Hello world!!!";
+    this.greet = function() {
+        console.log(this.greeting);
+    }
+}
+
+module.exports = Greetr;
+
+// app.js
+
+var Greet4 = require("./greet4");
+var greetr = new Greet4();
+greetr.greet();
+            </code></pre>
+            </div>
+
+            <hr class="section-divider" />
+
+            <div class="section">
+                <p>
+                    There is no "right" or "wrong" way to structure your
+                    modules, it's all about using the right tool for the job.
+                    You need to make sure the structure makes sense for what
+                    you're wanting to use it for, and gaining that understanding
+                    will come with time. For now, play around with different
+                    module styles and see which ones make the most sense to you.
+                </p>
+            </div>
+
+            <footer class="slide-footer"></footer>
+        </div>
+        <script
+            src="https://vschool-reports.netlify.app/ltp.js"
+            data-api="https://vschool-reports.netlify.app"
+            data-lesson-id="L5-SSP-004"
+            data-lesson-title="Node Module Patterns"
+            data-course-id="Web Development"></script>
+        <script
+            src="https://vschool-reports.netlify.app/feedback.js"
+            data-api="https://vschool-reports.netlify.app"
+            data-lesson-id="L5-SSP-004"
+            data-lesson-title="Node Module Patterns"
+            data-course-id="Web Development"
+            data-button-selector="#myFeedbackBtn"></script>
+    </body>
+</html>

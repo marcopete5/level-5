@@ -3,13 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Level 5 | Express and MongoDB - Node.js Modules</title>
+        <title>HTTP Review</title>
         <link rel="stylesheet" href="styles.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
     </head>
     <body>
         <div
@@ -17,33 +12,20 @@
             role="region"
             aria-labelledby="lesson-header">
             <header class="slide-header">
-                <h1 id="lesson-header">
-                    Level 5 | Express and MongoDB - Node.js Modules
-                </h1>
+                <h1 id="lesson-header">HTTP Review</h1>
                 <h2>Lesson</h2>
             </header>
 
             <div class="section">
-                <iframe
-                    class="video-embed"
-                    src="https://www.youtube.com/embed/z7Rknc3icY4"
-                    title="Node.js Modules Lesson"
-                    frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    aria-label="Video explaining Node.js modules, require, and module.exports"></iframe>
-            </div>
-
-            <hr class="section-divider" />
-
-            <div class="section">
                 <h3>Learning Objectives</h3>
                 <ul class="custom-list">
-                    <li>A student will be able to explain what a module is.</li>
                     <li>
-                        A student will be able to import and export a module
-                        using <code>require</code> and
-                        <code>module.exports</code>
+                        Students will be able to explain the HTTP and the
+                        Request/Response Cycle
+                    </li>
+                    <li>
+                        Students will be able to explain CRUD and the different
+                        Request Types
                     </li>
                 </ul>
             </div>
@@ -51,175 +33,33 @@
             <hr class="section-divider" />
 
             <div class="section">
-                <h3>Supplementary Content</h3>
-                <img
-                    src="https://coursework.vschool.io/content/images/size/w2000/2017/12/Image-result-for-node-modules-photo-banner.png"
-                    alt="Node.js modules banner image"
-                    style="max-width: 100%; height: auto; border-radius: 8px" />
-                <p>
-                    If you recall from the
-                    <a
-                        href="https://coursework.vschool.io/intro-to-node/"
-                        target="_blank"
-                        rel="noopener"
-                        >Intro to Node</a
-                    >
-                    post, one of the main requirements of having
-                    <code>JavaScript</code> be able to work on a server is to
-                    have code that can be more easily organized. Thus far in
-                    <code>JavaScript</code>, we're used to having each
-                    <code>JavaScript</code> file be completely on its own, where
-                    it can't rely on any code written in any other
-                    <code>JavaScript</code> file. (<code>AngularJS</code> is
-                    excluded from this, because it has its own solution to allow
-                    referencing code written in other files - dependency
-                    injection).
-                </p>
-                <p>
-                    The way <code>Node.js</code> deals with allowing for code
-                    separation is through modularization, or creating separated
-                    <em>modules</em>.
-                </p>
-                <p>
-                    <strong>Note:</strong> the specific syntax for how this is
-                    done in <code>JavaScript</code> is about to change in ES2015
-                    (A.K.A. ECMAScript 6), but the principles will be very
-                    similar. Also, because adoption of language updates is so
-                    slow, you will see this method of modularization for quite a
-                    while longer.
-                </p>
-            </div>
-
-            <hr class="section-divider" />
-
-            <div class="section">
-                <h3>require()</h3>
-                <p>
-                    By this point in the course you've likely used the global
-                    <code>require()</code> function in some of your
-                    <code>JavaScript</code> exercises. For example, in the
-                    <a
-                        href="https://coursework.vschool.io/javascript-calculator/"
-                        target="_blank"
-                        rel="noopener"
-                        >JavaScript Calculator</a
-                    >
-                    exercise, you had to install the
-                    <code>readline-sync</code> package using
-                    <code>NPM</code> and use the <code>require()</code> method
-                    to pull the awesomeness from the module into your own code.
-                    That looked something like this:
-                </p>
-                <pre><code class="language-jsx">
-var readline = require("readline-sync");
-
-var name = readline.question("Please type your name: ");
-            </code></pre>
-                <p>
-                    By simply <code>require</code>-ing the
-                    <code>readline-sync</code> module, we were able to use all
-                    the goodness it had built in!
-                </p>
-                <p>
-                    So we've already seen how to <code>require()</code> other
-                    people's modules, let's see how to create and
-                    <code>require()</code> our very own modules!
-                </p>
-            </div>
-
-            <hr class="section-divider" />
-
-            <div class="section">
-                <h3>Creating a module</h3>
-                <p>
-                    The most important thing to understand when it comes to
-                    creating your own modules is <code>module.exports</code>.
-                </p>
-                <p>
-                    <code>module</code> is a global <code>Node.js</code> object
-                    that contains properties with some information about any
-                    given <code>JavaScript</code> file. It has properties like
-                    <code>__dirname</code>, which is a path to the directory
-                    that the file is in, and <code>__filename</code> which is
-                    the filename itself.
-                </p>
-                <p>
-                    One of the properties on the <code>module</code> object is
-                    called <code>exports</code>. <code>exports</code> begins as
-                    an empty object, and is just sitting there waiting for us to
-                    put our code on it so that it can be pulled in by a
-                    <code>require()</code> function call somewhere else. This is
-                    how that looks in code:
-                </p>
-                <pre><code class="language-jsx">
-// greeting.js
-
-function greeting() {
-    console.log("Hello there!");
-}
-
-module.exports = greeting;
-            </code></pre>
-                <p>
-                    We set the <code>module.exports</code> object on this file
-                    to be a function expression (the code of the function
-                    itself, without actually calling it). Now we can
-                    <code>require</code> this simple module from anywhere we
-                    want! Assuming we have another file (let's call it
-                    <code>app.js</code>) that's in the same directory as
-                    <code>greeting.js</code>, we can now do:
-                </p>
-                <pre><code class="language-jsx">
-// app.js
-
-var greeting = require("./greeting.js");
-greeting(); // "Hello there!" prints to the console.
-            </code></pre>
-                <p>
-                    Because you'll almost exclusively be using modules that come
-                    from <code>JavaScript</code> files, you can actually leave
-                    out the <code>.js</code> on the module name:
-                </p>
-                <pre><code class="language-jsx">
-var greeting = require("./greeting");
-            </code></pre>
-                <p>
-                    <strong>However</strong>, you <strong>MUST</strong> keep the
-                    path to the module there (in the above case,
-                    <code>./</code>) if you are <code>require</code>-ing a
-                    module of your own. The only time you can remove it is if
-                    you are requiring a <code>Node.js</code> built-in module, or
-                    something you've installed with <code>NPM</code> that is
-                    inside the <code>node_modules</code> folder.
-                </p>
-            </div>
-
-            <hr class="section-divider" />
-
-            <div class="section">
-                <h3>Conclusion</h3>
-                <p>
-                    That pretty much covers the very basics of using
-                    <code>Node</code> modules in your projects. Remember that
-                    you'll need to <code>require()</code> the module in
-                    <em>every</em> <code>JavaScript</code> file you wish to use
-                    that module in.
-                </p>
-                <p>
-                    There's still a lot to learn about modules, so when you feel
-                    you've got a grasp on the basics, head over to
-                    <a
-                        href="https://coursework.vschool.io/node-module-patterns/"
-                        target="_blank"
-                        rel="noopener"
-                        >Module Patterns</a
-                    >
-                    to learn more about the most common ways to structure your
-                    modules!
-                </p>
+                <h3>Lesson Video</h3>
+                <iframe
+                    class="video-embed"
+                    src="https://www.youtube.com/embed/3Xk_U9jKauU"
+                    title="HTTP Review - Learn V School"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    aria-label="Video: HTTP Review"></iframe>
             </div>
 
             <footer class="slide-footer"></footer>
         </div>
+
+        <!-- HTTP Review -->
+        <script
+            src="https://vschool-reports.netlify.app/ltp.js"
+            data-api="https://vschool-reports.netlify.app"
+            data-lesson-id="L5-SSP-002"
+            data-lesson-title="HTTP Review"
+            data-course-id="Web Development"></script>
+        <script
+            src="https://vschool-reports.netlify.app/feedback.js"
+            data-api="https://vschool-reports.netlify.app"
+            data-lesson-id="L5-SSP-002"
+            data-lesson-title="HTTP Review"
+            data-course-id="Web Development"
+            data-button-selector="#myFeedbackBtn"></script>
     </body>
 </html>
