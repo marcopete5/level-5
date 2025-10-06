@@ -1,0 +1,434 @@
+[
+    {
+        "lessonId": "L5-ASSESSMENTS-001",
+        "title": "Level 5 Assignment Review",
+        "section": "Assessments",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-ASSESSMENTS-002",
+        "title": "Fullstack Project - Capstone",
+        "section": "Assessments",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MID_LEVEL-001",
+        "title": "Mid Level Skill Check",
+        "section": "Mid-Level",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-ERRORS_CODES-001",
+        "title": "Error Handling",
+        "section": "Errors & Codes",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-ERRORS_CODES-002",
+        "title": "Adding Status Codes",
+        "section": "Errors & Codes",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-REST_POST_AND_ROUTER-005",
+        "title": "Bounty Hunter Part 1 - Assignment",
+        "section": "REST, POST & Router",
+        "level": 5,
+        "order": 5,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-REST_POST_AND_ROUTER-001",
+        "title": "Intro to REST",
+        "section": "REST, POST & Router",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-REST_POST_AND_ROUTER-002",
+        "title": "POST Request in Express",
+        "section": "REST, POST & Router",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-REST_POST_AND_ROUTER-003",
+        "title": "ID's in Express",
+        "section": "REST, POST & Router",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-REST_POST_AND_ROUTER-004",
+        "title": "Express Router",
+        "section": "REST, POST & Router",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-PARAMS_AND_QUERIES-001",
+        "title": "Express Params",
+        "section": "Params and Queries",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-PARAMS_AND_QUERIES-002",
+        "title": "Express Queries",
+        "section": "Params and Queries",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-PARAMS_AND_QUERIES-003",
+        "title": "Thing Finder - Assignment",
+        "section": "Params and Queries",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-005",
+        "title": "Bounty Hunter Part 2 - Assignment",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 5,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-004",
+        "title": "Picked Off - Assignment",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-001",
+        "title": "Delete Request in Express",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-002",
+        "title": "Put Request in Express",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-003",
+        "title": "Middleware and Next",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-DELETE_PUT_AND_MIDDLEWARE-006",
+        "title": "Todo Backend - Assignment",
+        "section": "DELETE, PUT & Middleware",
+        "level": 5,
+        "order": 6,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-INTRO_TO_EXPRESS-001",
+        "title": "Intro to Express",
+        "section": "Intro to Express",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-INTRO_TO_EXPRESS-002",
+        "title": "First Express Server",
+        "section": "Intro to Express",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-INTRO_TO_EXPRESS-003",
+        "title": "Install Nodemon",
+        "section": "Intro to Express",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-INTRO_TO_EXPRESS-004",
+        "title": "Get Request",
+        "section": "Intro to Express",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-007",
+        "title": "Bounty Hunter Part 3",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 7,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-001",
+        "title": "Install Morgan",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-002",
+        "title": "Connecting Frontend to Backend",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-003",
+        "title": "Get Request to Server",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-004",
+        "title": "Post Request to Server",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-005",
+        "title": "Delete Request to Server",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 5,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-CONNECT_TO_FRONTEND-006",
+        "title": "Put Request to Server",
+        "section": "Connect to Frontend",
+        "level": 5,
+        "order": 6,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-SSP-001",
+        "title": "Introduction to Server Side Programming",
+        "section": "Server Side Programming",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-SSP-002",
+        "title": "HTTP Review",
+        "section": "Server Side Programming",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-SSP-003",
+        "title": "Node Module Basics",
+        "section": "Server Side Programming",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-SSP-004",
+        "title": "Node Module Patterns",
+        "section": "Server Side Programming",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-WELCOME-001",
+        "title": "Welcome to Level 5",
+        "section": "Welcome",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-006",
+        "title": "Bounty Hunter Final Part - Assignment",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 6,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-005",
+        "title": "CRUD Store - Assignment",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 5,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-001",
+        "title": "Introduction to Databases",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-002",
+        "title": "MongoDB Setup",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-007",
+        "title": "Relating Data in MongoDB",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 7,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-003",
+        "title": "Intro to Mongoose",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-004",
+        "title": "Schemas &amp; Models",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-005",
+        "title": "Get Request w/ Mongoose",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 5,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE-006",
+        "title": "Post Request w/ Mongoose",
+        "section": "Mongoose",
+        "level": 5,
+        "order": 6,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-001",
+        "title": "Install MongoDB Compass",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 1,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-002",
+        "title": "Delete Request w/ Mongoose",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 2,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-003",
+        "title": "Put Request w/ Mongoose",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 3,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    },
+    {
+        "lessonId": "L5-MONGOOSE_CONTINUED-004",
+        "title": "Params and Queries w/ Mongoose",
+        "section": "Mongoose Continued",
+        "level": 5,
+        "order": 4,
+        "storyPoints": 5,
+        "courseId": "Web Development"
+    }
+]
